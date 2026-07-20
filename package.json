@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-static",
+  "version": "1.0.0",
+  "description": "Static HTML/CSS/JS Portfolio",
+  "scripts": {
+    "dev": "npx http-server -p 3000"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

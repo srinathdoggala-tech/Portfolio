@@ -459,42 +459,132 @@ img {
    ========================================================================== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2.5rem;
+  align-items: stretch;
 }
 
-.about-text-card h3, .about-info-card h3 {
+.about-image-card {
+  padding: 0 !important;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  min-height: 480px;
+}
+
+.profile-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(7, 8, 13, 0) 50%, rgba(7, 8, 13, 0.7) 100%);
+  pointer-events: none;
+}
+
+.profile-glow {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 30px rgba(139, 92, 246, 0.25);
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.about-image-card:hover .profile-img {
+  transform: scale(1.03);
+}
+
+.about-image-card:hover .profile-glow {
+  box-shadow: inset 0 0 50px rgba(0, 242, 254, 0.35);
+}
+
+.about-content-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 3rem !important;
+}
+
+.about-bio h3, .about-facts-section h3 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding-bottom: 0.75rem;
 }
 
-.about-text-card p {
+.about-bio p {
   color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
   margin-bottom: 1.25rem;
 }
 
-.about-text-card p:last-child {
+.about-bio p:last-child {
   margin-bottom: 0;
 }
 
-.facts-list {
+.about-facts-section {
+  margin-top: auto;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.fact-item {
   display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
-.facts-list li {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+.fact-icon {
+  font-size: 1.4rem;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.05);
 }
 
-.facts-list strong {
-  color: var(--text-primary);
+.fact-text strong {
   display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
   font-family: 'Space Grotesk', sans-serif;
-  margin-bottom: 0.2rem;
+}
+
+.fact-text span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
 }
 
 .about-socials {
@@ -933,6 +1023,140 @@ textarea.form-input {
 }
 
 /* ==========================================================================
+   EXPERIENCE SECTION
+   ========================================================================== */
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.experience-item {
+  position: relative;
+  border-left: 3px solid var(--accent-purple);
+  padding-left: 2rem;
+  background: var(--bg-card);
+}
+
+.experience-badge-container {
+  margin-bottom: 0.75rem;
+}
+
+.experience-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 50px;
+  color: #c084fc;
+  display: inline-block;
+}
+
+.experience-header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.exp-title-org h3 {
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.company-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.exp-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.exp-date {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.exp-type {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.experience-desc {
+  color: var(--text-secondary);
+  font-size: 0.975rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.experience-details-grid {
+  margin-bottom: 1.5rem;
+}
+
+.experience-col h4 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.experience-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.experience-col li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.experience-col li::before {
+  content: '⚡';
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-size: 0.8rem;
+}
+
+.experience-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .experience-header-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .exp-meta {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .experience-item {
+    padding-left: 1.25rem;
+  }
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -953,6 +1177,20 @@ textarea.form-input {
   .about-grid, .skills-grid, .projects-grid, .contact-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .about-image-card {
+    height: 420px;
+    min-height: auto;
+  }
+
+  .about-content-card {
+    padding: 2rem !important;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .navbar {
