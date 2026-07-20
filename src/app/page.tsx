@@ -1,0 +1,58 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import CustomLoader from "@/components/CustomLoader";
+import ThreeCanvas from "@/components/ThreeCanvas";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
+import CodingProfiles from "@/components/CodingProfiles";
+import Achievements from "@/components/Achievements";
+import Testimonials from "@/components/Testimonials";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import CommandPalette from "@/components/CommandPalette";
+
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  return (
+    <>
+      <AnimatePresence mode="wait">
+        {loading && <CustomLoader onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      {!loading && (
+        <div className="relative min-h-screen flex flex-col">
+          {/* Subtle 3D background */}
+          <ThreeCanvas />
+
+          {/* Search Command Palette Overlay */}
+          <CommandPalette isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+          {/* Core Layout Structure */}
+          <Navbar onOpenSearch={() => setSearchOpen(true)} />
+          
+          <main className="flex-1">
+            <Hero />
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <CodingProfiles />
+            <Achievements />
+            <Testimonials />
+            <Contact />
+          </main>
+
+          <Footer />
+        </div>
+      )}
+    </>
+  );
+}
