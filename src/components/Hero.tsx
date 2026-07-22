@@ -197,15 +197,6 @@ export default function Hero() {
             <Linkedin className="h-6 w-6" />
           </a>
           <a
-            href="https://leetcode.com/u/doggalasrinath/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-slate-400 hover:text-white light:text-slate-500 light:hover:text-slate-900 transition-colors"
-            title="LeetCode"
-          >
-            <Code className="h-6 w-6" />
-          </a>
-          <a
             href="mailto:doggalasrinath@gmail.com"
             className="text-slate-400 hover:text-white light:text-slate-500 light:hover:text-slate-900 transition-colors"
             title="Email"

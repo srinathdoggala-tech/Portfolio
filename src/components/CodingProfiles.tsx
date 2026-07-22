@@ -114,59 +114,8 @@ export default function CodingProfiles() {
             </div>
           </motion.div>
 
-          {/* LeetCode & LinkedIn Cards Column */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            {/* LeetCode stats Card */}
-            <motion.div
-              className="glass-card rounded-2xl p-6 border border-white/5 flex flex-col justify-between"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Code2 className="h-5 w-5 text-accent-blue" />
-                  <h3 className="font-display text-sm font-bold text-white light:text-slate-900">LeetCode Metrics</h3>
-                </div>
-                <a
-                  href="https://leetcode.com/u/doggalasrinath/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded bg-accent-blue/10 px-2 py-0.5 text-[9px] font-mono text-blue-300 light:text-blue-700 hover:bg-accent-blue/20"
-                >
-                  Profile
-                </a>
-              </div>
-
-              <div className="space-y-4">
-                {/* Stat row 1 */}
-                <div className="flex justify-between items-center text-xs">
-                  <span className="flex items-center gap-1.5 text-slate-400 light:text-slate-500">
-                    <Flame className="h-4 w-4 text-accent-orange animate-pulse" />
-                    Streak Count
-                  </span>
-                  <span className="font-mono font-bold text-white light:text-slate-900">120+ Days</span>
-                </div>
-                {/* Stat row 2 */}
-                <div className="flex justify-between items-center text-xs">
-                  <span className="flex items-center gap-1.5 text-slate-400 light:text-slate-500">
-                    <Terminal className="h-4 w-4 text-slate-500" />
-                    Problems Solved
-                  </span>
-                  <span className="font-mono font-bold text-white light:text-slate-900">250+ (70% Medium)</span>
-                </div>
-                {/* Stat row 3 */}
-                <div className="flex justify-between items-center text-xs">
-                  <span className="flex items-center gap-1.5 text-slate-400 light:text-slate-500">
-                    <Zap className="h-4 w-4 text-yellow-500" />
-                    Contest Percentile
-                  </span>
-                  <span className="font-mono font-bold text-white light:text-slate-900">Top 15% (Global)</span>
-                </div>
-              </div>
-            </motion.div>
-
+          {/* Professional Network & Activity Column */}
+          <div className="lg:col-span-4 flex flex-col justify-between">
             {/* LinkedIn card */}
             <motion.div
               className="glass-card rounded-2xl p-6 border border-white/5 flex flex-col justify-between"
