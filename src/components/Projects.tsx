@@ -144,7 +144,7 @@ function TiltCard({ project }: { project: ProjectItem }) {
     >
       <motion.div
         style={{ rotateX, rotateY }}
-        className="glass-card flex flex-col h-full rounded-2xl p-6 border border-white/10 dark:border-white/10 light:border-slate-200 transition-all shadow-lg"
+        className="glass-card flex flex-col h-full rounded-2xl p-8 md:p-10 border border-white/10 dark:border-white/10 light:border-slate-200 transition-all shadow-lg justify-between gap-6"
       >
         {/* Project Accent Header Glow */}
         <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${project.accent}`} />
@@ -237,7 +237,7 @@ export default function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <TiltCard key={project.title} project={project} />
           ))}

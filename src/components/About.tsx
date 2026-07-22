@@ -72,10 +72,10 @@ export default function About() {
         </div>
 
         {/* About Grid */}
-        <div className="grid gap-8 lg:grid-cols-12">
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-12">
           {/* Text and Introduction card */}
           <motion.div
-            className="lg:col-span-7 glass-card rounded-2xl p-8 flex flex-col justify-between"
+            className="lg:col-span-7 glass-card rounded-2xl p-8 md:p-10 flex flex-col justify-between"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

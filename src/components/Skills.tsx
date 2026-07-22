@@ -143,7 +143,7 @@ export default function Skills() {
         {/* Skills Cards Grid */}
         <motion.div
           layout
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {skillCategories
@@ -156,7 +156,7 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4 }}
-                  className={`group glass-card rounded-2xl p-6 flex flex-col border ${category.colorClass}`}
+                  className={`group glass-card rounded-2xl p-8 md:p-10 flex flex-col border ${category.colorClass}`}
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-6">

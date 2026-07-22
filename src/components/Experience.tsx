@@ -68,7 +68,7 @@ export default function Experience() {
         {/* Timeline container */}
         <div className="relative border-l border-white/10 dark:border-white/10 light:border-slate-200 ml-4 md:ml-32">
           {experiences.map((exp, index) => (
-            <div key={exp.company + exp.role} className="relative mb-12 last:mb-0 pl-8 md:pl-12">
+            <div key={exp.company + exp.role} className="relative mb-16 md:mb-20 last:mb-0 pl-8 md:pl-12">
               {/* Timeline marker */}
               <motion.div
                 className="absolute left-[-9px] top-1.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-black border border-accent-purple shadow-[0_0_10px_rgba(168,85,247,0.4)]"
@@ -85,7 +85,7 @@ export default function Experience() {
 
               {/* Info Card */}
               <motion.div
-                className="glass-card rounded-2xl p-6 md:p-8"
+                className="glass-card rounded-2xl p-8 md:p-10"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}

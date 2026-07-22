@@ -46,10 +46,10 @@ export default function CodingProfiles() {
         </div>
 
         {/* Outer Grid */}
-        <div className="grid gap-8 lg:grid-cols-12">
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-12">
           {/* GitHub heatmap card */}
           <motion.div
-            className="lg:col-span-8 glass-card rounded-2xl p-6 flex flex-col border border-white/5"
+            className="lg:col-span-8 glass-card rounded-2xl p-8 md:p-10 flex flex-col border border-white/5"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
