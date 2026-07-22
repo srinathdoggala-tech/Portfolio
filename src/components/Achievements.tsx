@@ -95,10 +95,10 @@ export default function Achievements() {
   };
 
   return (
-    <section id="achievements" className="relative w-full min-h-[90vh] flex flex-col justify-center items-center py-28 md:py-36 px-6 sm:px-8 bg-black/10">
+    <section id="achievements" className="relative w-full py-16 md:py-20 px-6 sm:px-8 bg-black/10">
       <div className="mx-auto max-w-5xl w-full">
         {/* Section Header */}
-        <div className="mb-20 md:mb-24 flex flex-col items-center text-center">
+        <div className="mb-12 md:mb-14 flex flex-col items-center text-center">
           <motion.h2
             className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl"
             initial={{ opacity: 0, y: 20 }}
