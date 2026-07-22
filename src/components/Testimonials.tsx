@@ -68,10 +68,10 @@ export default function Testimonials() {
   const current = testimonials[currentIdx];
 
   return (
-    <section id="testimonials" className="relative w-full py-28 px-6 overflow-hidden flex flex-col items-center justify-center">
+    <section id="testimonials" className="relative w-full min-h-[90vh] flex flex-col justify-center items-center py-28 md:py-36 px-6 sm:px-8 overflow-hidden">
       <div className="mx-auto max-w-4xl w-full flex flex-col items-center justify-center text-center">
         {/* Section Header */}
-        <div className="mb-16 flex flex-col items-center text-center">
+        <div className="mb-20 md:mb-24 flex flex-col items-center text-center">
           <motion.h2
             className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl text-center"
             initial={{ opacity: 0, y: 20 }}

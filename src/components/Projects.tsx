@@ -218,10 +218,10 @@ function TiltCard({ project }: { project: ProjectItem }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative w-full py-24 px-6">
-      <div className="mx-auto max-w-7xl">
+    <section id="projects" className="relative w-full min-h-[90vh] flex flex-col justify-center items-center py-28 md:py-36 px-6 sm:px-8">
+      <div className="mx-auto max-w-7xl w-full">
         {/* Section Header */}
-        <div className="mb-16 flex flex-col items-center text-center">
+        <div className="mb-20 md:mb-24 flex flex-col items-center text-center">
           <motion.h2
             className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl"
             initial={{ opacity: 0, y: 20 }}
