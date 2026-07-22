@@ -16,6 +16,7 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
+import RecruiterDrawer from "@/components/RecruiterDrawer";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,9 @@ export default function Home() {
 
           {/* Search Command Palette Overlay */}
           <CommandPalette isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+          {/* Recruiter Fast-Brief Floating Drawer */}
+          <RecruiterDrawer />
 
           {/* Core Layout Structure */}
           <Navbar onOpenSearch={() => setSearchOpen(true)} />
