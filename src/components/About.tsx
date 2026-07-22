@@ -82,7 +82,7 @@ export const About: React.FC = () => {
                 As an engineer, I view software through both an algorithmic and product lens. At <strong className="text-white">Sreeva AI</strong>, I build full-stack features, asynchronous FastAPI pipelines, and Redis caching systems that reduced API latency by 35%.
               </p>
               <p className="text-gray-300 text-sm leading-relaxed">
-                My project work ranges from autonomous multi-agent research swarms (<strong className="text-white">ResearchGPT</strong>) to stress-testing AI ATS engines on <strong className="text-white">500+ resumes</strong> (<strong className="text-white">TalentLens AI</strong>) and edge computer vision inference (<strong className="text-white">MobileNetV2 Fruit/Veg AI</strong>).
+                My project work ranges from autonomous multi-agent research swarms (<strong className="text-white">ResearchGPT</strong>) to AI-powered code review engines (<strong className="text-white">ReviewGPT</strong>), stress-testing AI ATS platforms on <strong className="text-white">500+ resumes</strong> (<strong className="text-white">TalentLens AI</strong>), and edge computer vision inference (<strong className="text-white">MobileNetV2 Fruit/Veg AI</strong>).
               </p>
             </div>
 

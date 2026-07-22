@@ -113,6 +113,48 @@ export const EXPERIENCES: ExperienceItem[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: "review-gpt",
+    title: "ReviewGPT: AI-Powered Code Review Platform",
+    tagline: "Automated GitHub repository scanner combining static AST code analysis & Gemini AI for deep bug, security, and complexity audits.",
+    category: "Full Stack AI",
+    year: "2026",
+    description: "Built an AI-powered GitHub repository analysis platform using React, Vite, FastAPI, Python, and Google Gemini 2.5 Flash to perform automated code reviews, security vulnerability audits, cyclomatic complexity metrics, and AI refactoring suggestions.",
+    longDescription: "ReviewGPT bridges static code analysis and Large Language Models to provide actionable repository health insights before code reaches production. Combining GitHub REST API ingestion, custom AST analyzers, and Gemini 2.5 Flash, it identifies bugs, hardcoded secrets, SQL injection patterns, XSS risks, cyclomatic complexity hotspots, and generates AI refactoring recommendations with automated code explanations.",
+    architecture: {
+      title: "Repository Scanner & LLM Analysis Pipeline",
+      steps: [
+        { step: "1. GitHub REST API Ingestion", detail: "Scans public GitHub repositories, retrieving multi-branch structures and source file AST representations." },
+        { step: "2. Static Code Analyzer", detail: "Runs AST static checks for cyclomatic complexity, security risks (SQLi, XSS, exposed keys), and boundary bugs." },
+        { step: "3. Gemini 2.5 Flash Engine", detail: "Prompts Google Gemini 2.5 Flash to generate contextual code explanations, quality metrics, and refactoring fixes." },
+        { step: "4. ReviewGPT Dashboard", detail: "Renders real-time repository health score, issue distribution, file complexity metrics, and AI assistant UI." }
+      ]
+    },
+    metrics: [
+      "Sub-second static AST analysis & complexity scoring pipeline",
+      "5 Core Audit Vectors: Bugs, Security, Performance, Complexity, Code Quality",
+      "FastAPI serverless microservices deployed seamlessly on Vercel"
+    ],
+    challenges: [
+      "Analyzing deeply nested repository file structures efficiently within Vercel serverless function timeouts.",
+      "Filtering static check false positives while ensuring Gemini LLM outputs structured, line-specific remediation guidance."
+    ],
+    solutions: [
+      "Implemented asynchronous GitHub REST API fetching with concurrent FastAPI serverless execution routines.",
+      "Designed rigid Pydantic validation schemas and combined deterministic AST rules with LLM context prompts."
+    ],
+    features: [
+      "Public GitHub repository & branch-specific scanner",
+      "Automated Security Audits (SQLi, XSS, hardcoded credentials)",
+      "Cyclomatic & function complexity analysis engine",
+      "Interactive Code Health Dashboard with Overall Repository Score",
+      "AI Refactor Assistant providing line-level code improvements and explanations"
+    ],
+    technologies: ["React", "Vite", "FastAPI", "Python", "Google Gemini 2.5 Flash", "GitHub REST API", "Tailwind CSS", "Vercel", "JavaScript"],
+    githubUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform",
+    liveUrl: "https://ai-code-review-platform-tbdp.vercel.app",
+    featured: true
+  },
+  {
     id: "research-gpt",
     title: "ResearchGPT: Multi-Agent AI Research Assistant",
     tagline: "Autonomous 4-agent research swarm executing real-time web retrieval, fact verification, and report synthesis.",
