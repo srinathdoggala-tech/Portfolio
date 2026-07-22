@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import CustomLoader from "@/components/CustomLoader";
-import ThreeCanvas from "@/components/ThreeCanvas";
+import InteractiveBackground from "@/components/InteractiveBackground";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -29,8 +29,8 @@ export default function Home() {
 
       {!loading && (
         <div className="relative min-h-screen flex flex-col bg-bg-dark">
-          {/* 3D Canvas Particle Background */}
-          <ThreeCanvas />
+          {/* Interactive Background */}
+          <InteractiveBackground />
 
           {/* Search Command Palette Overlay */}
           <CommandPalette isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
