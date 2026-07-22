@@ -1,197 +1,151 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Terminal, Database, Code2, ShieldAlert, GitBranch } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Cpu, Server, Layout, Database, Cloud, Code2, Search, Filter, Sparkles, CheckCircle2 } from "lucide-react";
+import { SKILL_CATEGORIES } from "../lib/data";
 
-interface SkillItem {
-  name: string;
-  level: number; // percentage
-}
+const CATEGORY_ICONS: Record<string, React.ElementType> = {
+  "AI & Autonomous Systems": Cpu,
+  "Backend & Microservices": Server,
+  "Frontend Engineering": Layout,
+  "Databases & Storage": Database,
+  "DevOps & Cloud Infrastructure": Cloud,
+  "Core Computer Science": Code2,
+};
 
-interface SkillCategory {
-  title: string;
-  icon: React.ReactNode;
-  colorClass: string; // Tailwind glow border color style
-  skills: SkillItem[];
-}
+export const Skills: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-const skillCategories: SkillCategory[] = [
-  {
-    title: "AI & Machine Learning",
-    icon: <Cpu className="h-5 w-5" />,
-    colorClass: "hover:border-accent-purple/30 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] border-accent-purple/10",
-    skills: [
-      { name: "LLMs (GPT-4o, Claude, Gemini)", level: 90 },
-      { name: "LangChain & LangGraph", level: 90 },
-      { name: "Deep Learning (TensorFlow/Keras)", level: 85 },
-      { name: "Retrieval-Augmented Gen (RAG)", level: 88 },
-      { name: "Prompt Engineering & Embeddings", level: 92 },
-      { name: "Vector Databases (ChromaDB, pgvector)", level: 85 },
-      { name: "Computer Vision (OpenCV, MobileNetV2)", level: 80 },
-    ],
-  },
-  {
-    title: "Backend Engineering",
-    icon: <Database className="h-5 w-5" />,
-    colorClass: "hover:border-accent-blue/30 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] border-accent-blue/10",
-    skills: [
-      { name: "Python (FastAPI, Django)", level: 92 },
-      { name: "REST APIs & Integrations", level: 90 },
-      { name: "Asynchronous Programming", level: 85 },
-      { name: "Node.js (Express)", level: 75 },
-    ],
-  },
-  {
-    title: "Programming Languages",
-    icon: <Terminal className="h-5 w-5" />,
-    colorClass: "hover:border-accent-teal/30 group-hover:shadow-[0_0_30px_rgba(13,148,136,0.15)] border-accent-teal/10",
-    skills: [
-      { name: "Python", level: 95 },
-      { name: "SQL (PostgreSQL, SQLite)", level: 85 },
-      { name: "TypeScript & JavaScript", level: 84 },
-      { name: "Java", level: 78 },
-    ],
-  },
-  {
-    title: "Frontend & Modern Web",
-    icon: <Code2 className="h-5 w-5" />,
-    colorClass: "hover:border-accent-orange/30 group-hover:shadow-[0_0_30px_rgba(234,88,12,0.15)] border-accent-orange/10",
-    skills: [
-      { name: "ReactJS", level: 88 },
-      { name: "Next.js", level: 86 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "HTML5 & CSS3 Animations", level: 92 },
-    ],
-  },
-  {
-    title: "Databases & Caching",
-    icon: <ShieldAlert className="h-5 w-5" />,
-    colorClass: "hover:border-accent-blue/30 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] border-accent-blue/10",
-    skills: [
-      { name: "PostgreSQL", level: 88 },
-      { name: "MongoDB", level: 80 },
-      { name: "Redis Caching", level: 82 },
-    ],
-  },
-  {
-    title: "DevOps & Tooling",
-    icon: <GitBranch className="h-5 w-5" />,
-    colorClass: "hover:border-accent-purple/30 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] border-accent-purple/10",
-    skills: [
-      { name: "Git & GitHub Versioning", level: 90 },
-      { name: "Docker Containerization", level: 80 },
-      { name: "CI/CD & GitHub Actions", level: 78 },
-      { name: "Vercel & Render Deployment", level: 88 },
-    ],
-  },
-];
+  const categoriesList = ["All", ...SKILL_CATEGORIES.map((cat) => cat.title)];
 
-export default function Skills() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const filteredCategories = useMemo(() => {
+    return SKILL_CATEGORIES.map((cat) => {
+      const isCatSelected = selectedCategory === "All" || selectedCategory === cat.title;
+      if (!isCatSelected) return null;
+
+      const matchingSkills = cat.skills.filter(
+        (s) =>
+          s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          s.tag.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          s.level.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      if (matchingSkills.length === 0) return null;
+
+      return {
+        ...cat,
+        skills: matchingSkills,
+      };
+    }).filter(Boolean);
+  }, [searchQuery, selectedCategory]);
 
   return (
-    <section id="skills" className="relative w-full py-16 md:py-20 px-6 sm:px-8 bg-black/30">
-      <div className="mx-auto max-w-7xl w-full">
+    <section id="skills" className="py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
-        <div className="mb-12 md:mb-14 flex flex-col items-center text-center">
-          <motion.h2
-            className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Technical <span className="text-gradient-purple-blue">Skills</span>
-          </motion.h2>
-          <motion.div
-            className="mt-2 h-1 w-12 bg-accent-purple rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: 48 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          />
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>TECHNICAL CAPABILITIES &amp; CS CORE</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+            Engineering &amp; Technology <span className="gradient-text-emerald">Stack</span>
+          </h2>
+          <p className="text-gray-400 text-base sm:text-lg">
+            Production technology skills across AI orchestration, asynchronous backend systems, modern web frontends, and core computer science fundamentals.
+          </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="mb-12 flex flex-wrap justify-center gap-3">
-          <button
-            onClick={() => setSelectedCategory(null)}
-            className={`rounded-full px-5 py-2 font-sans text-xs font-semibold tracking-wider uppercase transition-all ${
-              selectedCategory === null
-                ? "bg-gradient-to-r from-accent-purple to-accent-blue text-white shadow-lg"
-                : "bg-white/5 border border-white/10 text-slate-400 hover:text-white light:border-slate-350 light:bg-slate-100 light:text-slate-600 light:hover:bg-slate-200"
-            }`}
-          >
-            All Skill Areas
-          </button>
-          {skillCategories.map((cat) => (
-            <button
-              key={cat.title}
-              onClick={() => setSelectedCategory(cat.title)}
-              className={`rounded-full px-5 py-2 font-sans text-xs font-semibold tracking-wider uppercase transition-all ${
-                selectedCategory === cat.title
-                  ? "bg-gradient-to-r from-accent-purple to-accent-blue text-white shadow-lg"
-                  : "bg-white/5 border border-white/10 text-slate-400 hover:text-white light:border-slate-350 light:bg-slate-100 light:text-slate-600 light:hover:bg-slate-200"
-              }`}
-            >
-              {cat.title}
-            </button>
-          ))}
+        {/* Filter Controls Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl glass-panel border border-white/10">
+          {/* Search Box */}
+          <div className="relative w-full sm:w-72">
+            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search skills (e.g. FastAPI, LangChain, React)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-white/10 focus:outline-none focus:border-blue-500/50"
+            />
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+            {categoriesList.map((catName) => {
+              const isSelected = selectedCategory === catName;
+              return (
+                <button
+                  key={catName}
+                  onClick={() => setSelectedCategory(catName)}
+                  className={`px-3 py-1.5 text-xs font-mono rounded-xl transition-all ${
+                    isSelected
+                      ? "bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/20"
+                      : "text-gray-400 hover:text-white glass-panel border border-white/5"
+                  }`}
+                >
+                  {catName}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Skills Cards Grid */}
-        <motion.div
-          layout
-          className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3"
-        >
-          <AnimatePresence mode="popLayout">
-            {skillCategories
-              .filter((cat) => selectedCategory === null || cat.title === selectedCategory)
-              .map((category) => (
-                <motion.div
-                  key={category.title}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className={`group glass-card rounded-2xl p-8 md:p-10 flex flex-col border ${category.colorClass}`}
-                >
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="rounded-lg bg-white/5 p-2.5 text-accent-purple light:bg-slate-150 light:text-purple-600">
-                      {category.icon}
+        <div className="space-y-12">
+          {filteredCategories.length === 0 ? (
+            <div className="p-12 text-center text-gray-400 font-mono text-sm glass-panel rounded-2xl border border-white/10">
+              No skills found matching &quot;{searchQuery}&quot;. Try resetting your search filter.
+            </div>
+          ) : (
+            filteredCategories.map((category) => {
+              if (!category) return null;
+              const Icon = CATEGORY_ICONS[category.title] || Code2;
+              return (
+                <div key={category.title} className="space-y-4">
+                  {/* Category Title Header */}
+                  <div className="flex items-center gap-3 pb-2 border-b border-white/10">
+                    <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="font-display text-lg font-bold text-white light:text-slate-900">{category.title}</h3>
+                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                    <span className="text-xs font-mono text-gray-500">({category.skills.length} skills)</span>
                   </div>
 
-                  {/* Skills Progress list */}
-                  <div className="flex-1 space-y-4">
-                    {category.skills.map((skill) => (
-                      <div key={skill.name} className="flex flex-col">
-                        <div className="flex justify-between items-center mb-1 font-sans text-xs font-medium text-slate-300 light:text-slate-700">
-                          <span>{skill.name}</span>
-                          <span className="text-slate-400 light:text-slate-500 font-semibold">{skill.level}%</span>
+                  {/* Skills Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {category.skills.map((skill, idx) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: idx * 0.05 }}
+                        className="glass-panel glass-panel-hover p-4 rounded-xl border border-white/10 flex items-center justify-between group"
+                      >
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-sm text-white group-hover:text-blue-400 transition-colors">
+                              {skill.name}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-400 font-mono">{skill.tag}</p>
                         </div>
-                        {/* Glow Progress Bar container */}
-                        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden light:bg-slate-200">
-                          <motion.div
-                            className="h-full bg-gradient-to-r from-accent-purple to-accent-blue rounded-full"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                          />
-                        </div>
-                      </div>
+
+                        <span className="px-2.5 py-1 text-[10px] font-mono font-medium rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 flex-shrink-0">
+                          {skill.level}
+                        </span>
+                      </motion.div>
                     ))}
                   </div>
-                </motion.div>
-              ))}
-          </AnimatePresence>
-        </motion.div>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
     </section>
   );
-}
+};

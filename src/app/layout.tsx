@@ -1,49 +1,94 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { PERSONAL_INFO } from "@/lib/data";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-sans",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space",
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Srinath Doggala | Premium AI Engineer & Full-Stack Developer",
+  title: "Srinath Doggala | AI Engineer & Full Stack Architect",
   description:
-    "Portfolio of Srinath Doggala, a software engineer specializing in Artificial Intelligence, Multi-Agent LLM Orchestrations, Deep Learning, and Full-Stack web architectures with Python, FastAPI, React, and Next.js.",
+    "Portfolio of Srinath Doggala - Founding AI Full Stack Engineer Intern building autonomous multi-agent AI systems, FastAPI microservices, and high-throughput web applications.",
   keywords: [
+    "Srinath Doggala",
     "AI Engineer",
-    "Machine Learning Engineer",
-    "Software Engineer",
-    "Full Stack Developer",
-    "LLM Engineer",
-    "Generative AI Engineer",
-    "Python Developer",
-    "FastAPI",
-    "React",
-    "TensorFlow",
-    "LangChain",
-    "RAG",
-    "Prompt Engineering",
-    "OpenCV",
-    "Docker",
-    "Git",
-    "PostgreSQL",
-    "MongoDB",
+    "Full Stack Engineer",
+    "Software Engineer Portfolio",
+    "FastAPI Developer",
+    "ReactJS Developer",
+    "Next.js Developer",
+    "LangChain Multi-Agent Systems",
+    "OpenAI Claude APIs",
+    "PostgreSQL Redis Docker",
+    "Chandigarh University AI ML"
   ],
-  authors: [{ name: "Srinath Doggala", url: "https://github.com/srinathdoggala-tech" }],
+  authors: [{ name: "Srinath Doggala", url: "https://srinathdoggala.tech" }],
+  creator: "Srinath Doggala",
   openGraph: {
-    title: "Srinath Doggala | AI Engineer Portfolio",
-    description: "Recruiter-focused portfolio showcasing multi-agent AI architectures, machine learning models, and complex full-stack systems.",
+    title: "Srinath Doggala | AI Engineer & Full Stack Architect",
+    description:
+      "Production AI & Full Stack Portfolio: Autonomous Multi-Agent Swarms, FastAPI Asynchronous Microservices, and Next.js platforms.",
+    url: "https://srinathdoggala.tech",
+    siteName: "Srinath Doggala Portfolio",
+    images: [
+      {
+        url: "https://srinathdoggala.tech/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Srinath Doggala - AI Engineer & Full Stack Architect",
+      },
+    ],
+    locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Srinath Doggala | AI Engineer & Full Stack Architect",
+    description:
+      "Production AI & Full Stack Portfolio: Multi-Agent Systems, FastAPI Backends, Next.js Platforms.",
+    creator: "@srinathdoggala",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: PERSONAL_INFO.name,
+  jobTitle: "AI Full Stack Engineer Intern",
+  worksFor: {
+    "@type": "Organization",
+    name: "Sreeva AI",
+  },
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "Chandigarh University",
+  },
+  url: "https://srinathdoggala.tech",
+  sameAs: [PERSONAL_INFO.github, PERSONAL_INFO.linkedin],
+  knowsAbout: [
+    "Artificial Intelligence",
+    "Multi-Agent Systems",
+    "LangChain",
+    "FastAPI",
+    "Python",
+    "ReactJS",
+    "Next.js",
+    "PostgreSQL",
+    "Redis",
+    "Docker"
+  ],
 };
 
 export default function RootLayout({
@@ -52,29 +97,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth dark`}>
       <head>
         <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  if (theme === 'light') {
-                    document.documentElement.classList.add('light');
-                  } else {
-                    document.documentElement.classList.remove('light');
-                  }
-                } catch (e) {}
-              })()
-            `,
-          }}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans select-none bg-bg-dark text-slate-100 selection:bg-accent-purple/35 selection:text-white transition-colors duration-500">
+      <body className="min-h-screen bg-[#030712] text-gray-100 antialiased font-sans">
         {children}
       </body>
     </html>

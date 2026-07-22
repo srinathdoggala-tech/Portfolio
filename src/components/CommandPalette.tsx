@@ -1,234 +1,185 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { Search, Globe, Mail, Phone, Sun, Moon, Copy, Check, Terminal } from "lucide-react";
+import React, { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Search, FileText, Mail, ExternalLink, Code2, Briefcase, GraduationCap, Award, Cpu } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "./Icons";
+import { PERSONAL_INFO, PROJECTS } from "../lib/data";
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface CommandItem {
-  id: string;
-  title: string;
-  category: "Navigation" | "Actions" | "Contacts";
-  action: () => void;
-  icon: React.ReactNode;
-}
+export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
+  const [query, setQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [copied, setCopied] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const actions = useMemo(() => {
+    return [
+      { id: "hero", title: "Go to Home / Hero", category: "Navigation", icon: Cpu, action: () => scrollTo("#hero") },
+      { id: "about", title: "Go to About & Statistics", category: "Navigation", icon: FileText, action: () => scrollTo("#about") },
+      { id: "experience", title: "Go to Experience (Sreeva AI)", category: "Navigation", icon: Briefcase, action: () => scrollTo("#experience") },
+      { id: "projects", title: "Go to Projects Showcase", category: "Navigation", icon: Code2, action: () => scrollTo("#projects") },
+      { id: "skills", title: "Go to Skills & Core CS", category: "Navigation", icon: Cpu, action: () => scrollTo("#skills") },
+      { id: "certifications", title: "Go to Certifications", category: "Navigation", icon: Award, action: () => scrollTo("#certifications") },
+      { id: "education", title: "Go to Education", category: "Navigation", icon: GraduationCap, action: () => scrollTo("#education") },
+      { id: "contact", title: "Go to Contact & Availability", category: "Navigation", icon: Mail, action: () => scrollTo("#contact") },
+      
+      // Direct Project Links
+      ...PROJECTS.map((proj) => ({
+        id: `proj-${proj.id}`,
+        title: `Project: ${proj.title}`,
+        category: "Projects",
+        icon: Code2,
+        action: () => scrollTo(`#project-${proj.id}`),
+      })),
 
-  // Command palette events listener
+      // External Actions
+      { id: "resume", title: "Download Resume (PDF)", category: "Actions", icon: FileText, action: () => scrollTo("#contact") },
+      { id: "github", title: "Open GitHub Profile", category: "Socials", icon: GithubIcon, action: () => window.open(PERSONAL_INFO.github, "_blank") },
+      { id: "linkedin", title: "Open LinkedIn Profile", category: "Socials", icon: LinkedinIcon, action: () => window.open(PERSONAL_INFO.linkedin, "_blank") },
+      { id: "email", title: "Send Email (doggalasrinath@gmail.com)", category: "Socials", icon: Mail, action: () => window.location.href = `mailto:${PERSONAL_INFO.email}` },
+    ];
+  }, []);
+
+  const scrollTo = (selector: string) => {
+    onClose();
+    const el = document.querySelector(selector);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const filteredActions = useMemo(() => {
+    if (!query) return actions;
+    return actions.filter(
+      (item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.category.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [query, actions]);
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [query]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         if (isOpen) onClose();
-        else onClose(); // wait, to toggle: if open, close, else open.
+      }
+
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev + 1) % Math.max(1, filteredActions.length));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev - 1 + filteredActions.length) % Math.max(1, filteredActions.length));
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (filteredActions[selectedIndex]) {
+          filteredActions[selectedIndex].action();
+        }
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
-
-  // Focus input on open
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 50);
-    } else {
-      setSearchQuery("");
-    }
-  }, [isOpen]);
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText("doggalasrinath@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const toggleTheme = () => {
-    const isLight = document.documentElement.classList.contains("light");
-    if (isLight) {
-      document.documentElement.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.add("light");
-      localStorage.setItem("theme", "light");
-    }
-    onClose();
-  };
-
-  const navigateTo = (selector: string) => {
-    const el = document.querySelector(selector);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-    onClose();
-  };
-
-  const commands: CommandItem[] = [
-    {
-      id: "nav-about",
-      title: "Go to About Me",
-      category: "Navigation",
-      action: () => navigateTo("#about"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "nav-skills",
-      title: "Go to Skills & Technologies",
-      category: "Navigation",
-      action: () => navigateTo("#skills"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "nav-exp",
-      title: "Go to Work Experience",
-      category: "Navigation",
-      action: () => navigateTo("#experience"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "nav-projects",
-      title: "Go to Featured Projects",
-      category: "Navigation",
-      action: () => navigateTo("#projects"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "nav-ach",
-      title: "Go to Certifications & Achievements",
-      category: "Navigation",
-      action: () => navigateTo("#achievements"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "nav-contact",
-      title: "Go to Contact",
-      category: "Navigation",
-      action: () => navigateTo("#contact"),
-      icon: <Terminal className="h-4 w-4" />,
-    },
-    {
-      id: "action-theme",
-      title: "Toggle Theme (Light / Dark)",
-      category: "Actions",
-      action: toggleTheme,
-      icon: <Sun className="h-4 w-4 light:hidden" />, // will show correctly
-    },
-    {
-      id: "action-copy-email",
-      title: copied ? "Email Copied!" : "Copy Email Address",
-      category: "Actions",
-      action: copyEmail,
-      icon: copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />,
-    },
-    {
-      id: "contact-github",
-      title: "Open GitHub Profile",
-      category: "Contacts",
-      action: () => {
-        window.open("https://github.com/srinathdoggala-tech", "_blank");
-        onClose();
-      },
-      icon: <Globe className="h-4 w-4" />,
-    },
-    {
-      id: "contact-linkedin",
-      title: "Open LinkedIn Profile",
-      category: "Contacts",
-      action: () => {
-        window.open("https://www.linkedin.com/in/srinath-doggala-081083286/", "_blank");
-        onClose();
-      },
-      icon: <Globe className="h-4 w-4" />,
-    },
-  ];
-
-  // Filtering
-  const filteredCommands = commands.filter((cmd) =>
-    cmd.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cmd.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  }, [isOpen, filteredActions, selectedIndex, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black/75 px-6 pt-24 backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        >
-          {/* Main Search Panel container */}
+        <div className="fixed inset-0 z-[110] flex items-start justify-center pt-20 px-4">
+          {/* Backdrop */}
           <motion.div
-            className="w-full max-w-xl overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 shadow-2xl flex flex-col light:bg-white light:border-slate-300"
-            initial={{ y: -20, scale: 0.98 }}
-            animate={{ y: 0, scale: 1 }}
-            exit={{ y: -20, scale: 0.98 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/70 backdrop-blur-md"
+          />
+
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.2 }}
-            onClick={(e) => e.stopPropagation()} // stop click bubbling
+            className="relative w-full max-w-2xl glass-panel rounded-2xl border border-white/15 overflow-hidden shadow-2xl z-10"
           >
-            {/* Input Header bar */}
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/10 light:border-slate-200">
-              <Search className="h-5 w-5 text-slate-400 shrink-0" />
+            {/* Search Input Bar */}
+            <div className="flex items-center px-4 border-b border-white/10 bg-white/[0.02]">
+              <Search className="w-5 h-5 text-gray-400 mr-3" />
               <input
-                ref={inputRef}
                 type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search command menu or navigate..."
-                className="w-full bg-transparent border-none outline-none font-sans text-sm text-white light:text-slate-900 placeholder-slate-500"
+                autoFocus
+                placeholder="Type a command or search sections, projects, links..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full py-4 bg-transparent text-white placeholder-gray-500 focus:outline-none text-base"
               />
-              <span className="font-sans text-[10px] bg-white/5 border border-white/10 rounded px-1.5 py-0.5 text-slate-500 light:bg-slate-100 light:border-slate-300">
+              <kbd className="hidden sm:inline-block px-2 py-0.5 text-xs text-gray-400 bg-white/10 rounded border border-white/10">
                 ESC
-              </span>
+              </kbd>
             </div>
 
-            {/* List entries */}
-            <div className="max-h-[300px] overflow-y-auto p-2">
-              {filteredCommands.length > 0 ? (
-                // Group by categories
-                ["Navigation", "Actions", "Contacts"].map((cat) => {
-                  const catCmds = filteredCommands.filter((c) => c.category === cat);
-                  if (catCmds.length === 0) return null;
-
+            {/* Results List */}
+            <div className="max-h-96 overflow-y-auto p-2 space-y-1">
+              {filteredActions.length === 0 ? (
+                <div className="p-8 text-center text-gray-400 text-sm">
+                  No matching commands found for &quot;{query}&quot;
+                </div>
+              ) : (
+                filteredActions.map((item, index) => {
+                  const Icon = item.icon;
+                  const isSelected = index === selectedIndex;
                   return (
-                    <div key={cat} className="mb-4 last:mb-0">
-                      <h4 className="px-3 py-1 font-display text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                        {cat}
-                      </h4>
-                      <div className="space-y-0.5 mt-1">
-                        {catCmds.map((cmd) => (
-                          <button
-                            key={cmd.id}
-                            onClick={cmd.action}
-                            className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-left font-sans text-xs font-semibold text-slate-300 light:text-slate-700 hover:bg-white/5 hover:text-white light:hover:bg-slate-100 light:hover:text-slate-900 transition-colors"
-                          >
-                            <span className="text-slate-500">{cmd.icon}</span>
-                            <span className="flex-1">{cmd.title}</span>
-                          </button>
-                        ))}
+                    <button
+                      key={item.id}
+                      onClick={() => item.action()}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-sm transition-all ${
+                        isSelected
+                          ? "bg-blue-600/20 text-white border border-blue-500/40"
+                          : "text-gray-300 hover:bg-white/5"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-1.5 rounded-lg ${isSelected ? "bg-blue-500/20 text-blue-400" : "bg-white/5 text-gray-400"}`}>
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <span className="font-medium">{item.title}</span>
                       </div>
-                    </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs px-2 py-0.5 rounded-md bg-white/5 text-gray-400 border border-white/5">
+                          {item.category}
+                        </span>
+                        <ExternalLink className="w-3.5 h-3.5 text-gray-500" />
+                      </div>
+                    </button>
                   );
                 })
-              ) : (
-                <div className="py-8 text-center text-xs font-sans text-slate-500">
-                  No matching commands found.
-                </div>
               )}
             </div>
+
+            {/* Footer info */}
+            <div className="px-4 py-2.5 border-t border-white/10 bg-black/40 flex items-center justify-between text-xs text-gray-400">
+              <div className="flex items-center gap-2">
+                <span>Navigate with <kbd className="px-1.5 py-0.5 bg-white/10 rounded">↑</kbd> <kbd className="px-1.5 py-0.5 bg-white/10 rounded">↓</kbd></span>
+                <span>Select with <kbd className="px-1.5 py-0.5 bg-white/10 rounded">↵</kbd></span>
+              </div>
+              <span className="text-blue-400 font-mono">Srinath Doggala Portfolio</span>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
-}
+};

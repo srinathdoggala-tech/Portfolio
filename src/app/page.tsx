@@ -1,66 +1,64 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import CustomLoader from "@/components/CustomLoader";
-import InteractiveBackground from "@/components/InteractiveBackground";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import CodingProfiles from "@/components/CodingProfiles";
-import Achievements from "@/components/Achievements";
-import Testimonials from "@/components/Testimonials";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import CommandPalette from "@/components/CommandPalette";
-import RecruiterDrawer from "@/components/RecruiterDrawer";
-import FigmaMultiplayerCursors from "@/components/FigmaMultiplayerCursors";
+import React, { useState } from "react";
+import { LoadingScreen } from "@/components/LoadingScreen";
+import { InteractiveBackground } from "@/components/InteractiveBackground";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { BackToTop } from "@/components/BackToTop";
+import { Navbar } from "@/components/Navbar";
+import { CommandPalette } from "@/components/CommandPalette";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
+import { Projects } from "@/components/Projects";
+import { Skills } from "@/components/Skills";
+import { TechStackEcosystem } from "@/components/TechStackEcosystem";
+import { Certifications } from "@/components/Certifications";
+import { Education } from "@/components/Education";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {loading && <CustomLoader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+    <div className="min-h-screen bg-[#030712] text-gray-100 selection:bg-blue-500/30 selection:text-white relative font-sans">
+      {/* Initial Loading Screen */}
+      <LoadingScreen />
 
-      {!loading && (
-        <div className="relative min-h-screen flex flex-col bg-bg-dark">
-          {/* Interactive Background */}
-          <InteractiveBackground />
+      {/* Top Reading Scroll Progress Bar */}
+      <ReadingProgress />
 
-          {/* Figma-Style Canvas Multiplayer Cursors Overlay */}
-          <FigmaMultiplayerCursors />
+      {/* Interactive Background Canvas & Auroras */}
+      <InteractiveBackground />
 
-          {/* Search Command Palette Overlay */}
-          <CommandPalette isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      {/* Back To Top Floating Button */}
+      <BackToTop />
 
-          {/* Recruiter Fast-Brief Floating Drawer */}
-          <RecruiterDrawer />
+      {/* Glassmorphic Navbar Header */}
+      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
-          {/* Core Layout Structure */}
-          <Navbar onOpenSearch={() => setSearchOpen(true)} />
-          
-          <main className="flex-1">
-            <Hero />
-            <About />
-            <Skills />
-            <Experience />
-            <Projects />
-            <CodingProfiles />
-            <Achievements />
-            <Testimonials />
-            <Contact />
-          </main>
+      {/* Command Palette Modal (Ctrl+K) */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
 
-          <Footer />
-        </div>
-      )}
-    </>
+      {/* Main Page Content */}
+      <main className="relative z-10">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <TechStackEcosystem />
+        <Certifications />
+        <Education />
+        <Contact />
+      </main>
+
+      {/* Minimal Engineering Footer */}
+      <Footer />
+    </div>
   );
 }
