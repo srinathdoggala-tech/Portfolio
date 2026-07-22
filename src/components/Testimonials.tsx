@@ -68,12 +68,12 @@ export default function Testimonials() {
   const current = testimonials[currentIdx];
 
   return (
-    <section id="testimonials" className="relative w-full py-24 px-6 overflow-hidden">
-      <div className="mx-auto max-w-4xl">
+    <section id="testimonials" className="relative w-full py-28 px-6 overflow-hidden flex flex-col items-center justify-center">
+      <div className="mx-auto max-w-4xl w-full flex flex-col items-center justify-center text-center">
         {/* Section Header */}
         <div className="mb-16 flex flex-col items-center text-center">
           <motion.h2
-            className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl"
+            className="font-display text-3xl font-bold tracking-tight text-white light:text-slate-900 sm:text-4xl text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -82,7 +82,7 @@ export default function Testimonials() {
             Endorsements & <span className="text-gradient-purple-blue">Reviews</span>
           </motion.h2>
           <motion.div
-            className="mt-2 h-1 w-12 bg-accent-purple rounded-full"
+            className="mt-3 h-1 w-12 bg-accent-purple rounded-full mx-auto"
             initial={{ width: 0 }}
             whileInView={{ width: 48 }}
             viewport={{ once: true }}
@@ -91,9 +91,9 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative min-h-[300px] flex items-center justify-center">
+        <div className="relative min-h-[300px] w-full flex items-center justify-center">
           {/* Glass Slider Card */}
-          <div className="w-full relative z-10">
+          <div className="w-full relative z-10 flex items-center justify-center">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={current.id}
@@ -103,17 +103,17 @@ export default function Testimonials() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.45, ease: "easeInOut" }}
-                className="glass-card rounded-2xl p-8 md:p-12 relative flex flex-col items-center border border-white/5"
+                className="glass-card rounded-2xl p-8 md:p-12 relative flex flex-col items-center justify-center text-center border border-white/5 w-full shadow-2xl"
               >
-                <Quote className="h-10 w-10 text-accent-purple/35 mb-6 shrink-0" />
+                <Quote className="h-10 w-10 text-accent-purple/40 mb-6 shrink-0 mx-auto" />
                 
-                <p className="font-sans text-center text-base md:text-lg leading-relaxed text-slate-300 light:text-slate-600 mb-8 italic">
+                <p className="font-sans text-center text-base md:text-lg leading-relaxed text-slate-200 light:text-slate-700 mb-8 italic max-w-2xl mx-auto">
                   &ldquo;{current.text}&rdquo;
                 </p>
 
-                <div className="text-center">
-                  <h4 className="font-display font-bold text-white light:text-slate-900">{current.name}</h4>
-                  <p className="font-sans text-xs text-slate-400 light:text-slate-500 mt-0.5">
+                <div className="text-center mx-auto">
+                  <h4 className="font-display font-bold text-lg text-white light:text-slate-900">{current.name}</h4>
+                  <p className="font-sans text-xs text-slate-400 light:text-slate-500 mt-1">
                     {current.role} • <strong className="text-accent-blue">{current.company}</strong>
                   </p>
                 </div>
@@ -122,17 +122,17 @@ export default function Testimonials() {
           </div>
 
           {/* Navigation Controls */}
-          <div className="absolute inset-x-0 md:-inset-x-12 top-1/2 -translate-y-1/2 flex justify-between z-20 pointer-events-none">
+          <div className="absolute inset-x-0 md:-inset-x-14 top-1/2 -translate-y-1/2 flex justify-between z-20 pointer-events-none px-2 md:px-0">
             <button
               onClick={handlePrev}
-              className="pointer-events-auto rounded-full bg-white/5 border border-white/10 p-2 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-105 active:scale-95 transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-600 light:hover:bg-slate-200"
+              className="pointer-events-auto rounded-full bg-white/10 border border-white/15 p-3 text-slate-300 hover:text-white hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-lg backdrop-blur-md light:bg-slate-100 light:border-slate-300 light:text-slate-700 light:hover:bg-slate-200"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={handleNext}
-              className="pointer-events-auto rounded-full bg-white/5 border border-white/10 p-2 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-105 active:scale-95 transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-600 light:hover:bg-slate-200"
+              className="pointer-events-auto rounded-full bg-white/10 border border-white/15 p-3 text-slate-300 hover:text-white hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-lg backdrop-blur-md light:bg-slate-100 light:border-slate-300 light:text-slate-700 light:hover:bg-slate-200"
               aria-label="Next Testimonial"
             >
               <ChevronRight className="h-5 w-5" />
@@ -141,7 +141,7 @@ export default function Testimonials() {
         </div>
 
         {/* Bullet Indicator dots */}
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-8 flex justify-center items-center gap-2.5 mx-auto">
           {testimonials.map((_, idx) => (
             <button
               key={idx}
@@ -149,8 +149,8 @@ export default function Testimonials() {
                 setDirection(idx > currentIdx ? 1 : -1);
                 setCurrentIdx(idx);
               }}
-              className={`h-2 rounded-full transition-all ${
-                currentIdx === idx ? "w-6 bg-accent-purple" : "w-2 bg-white/10 light:bg-slate-300"
+              className={`h-2.5 rounded-full transition-all cursor-pointer ${
+                currentIdx === idx ? "w-7 bg-accent-purple shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "w-2.5 bg-white/20 hover:bg-white/40 light:bg-slate-300"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
