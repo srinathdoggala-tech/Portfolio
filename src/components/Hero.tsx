@@ -106,24 +106,28 @@ export default function Hero() {
 
       {/* Recruiter Alert Banner */}
       <motion.div
-        className="z-10 mb-6 flex items-center gap-2 rounded-full border border-accent-purple/20 bg-accent-purple/5 px-4 py-1.5 font-sans text-xs font-medium text-purple-300 shadow-md backdrop-blur-md light:border-accent-purple/30 light:bg-accent-purple/10 light:text-purple-800"
+        className="z-10 mb-8 flex items-center gap-2.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-5 py-2 font-sans text-xs font-semibold text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.2)] backdrop-blur-xl light:border-purple-500/40 light:bg-purple-100 light:text-purple-900"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <Sparkles className="h-3.5 w-3.5 text-accent-purple animate-pulse" />
-        <span>Currently Interning at <strong>Sreeva AI</strong> • Open for Opportunities</span>
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+        </span>
+        <Sparkles className="h-4 w-4 text-purple-400 animate-pulse" />
+        <span>Founding AI Engineer Intern @ <strong>Sreeva AI</strong> • Open for 2026/2027 Roles</span>
       </motion.div>
 
       {/* Main Content */}
       <div className="z-10 text-center max-w-4xl flex flex-col items-center">
         <motion.h1
-          className="font-display text-4xl font-extrabold tracking-tight text-white light:text-slate-900 sm:text-6xl md:text-7xl"
+          className="font-display text-5xl font-extrabold tracking-tight text-white light:text-slate-900 sm:text-7xl md:text-8xl leading-tight"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          Hi, I&apos;m <span className="text-gradient-purple-blue">Srinath Doggala</span>
+          Hi, I&apos;m <span className="text-shimmer">Srinath Doggala</span>
         </motion.h1>
 
         {/* Dynamic Typing Title */}

@@ -111,6 +111,32 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.text-shimmer {
+  background: linear-gradient(90deg, #a855f7 0%, #3b82f6 33%, #0d9488 66%, #a855f7 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerSweep 4s linear infinite;
+}
+
+@keyframes shimmerSweep {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.glow-purple {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+}
+
+.glow-blue {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.25);
+}
+
+.glow-teal {
+  box-shadow: 0 0 30px rgba(13, 148, 136, 0.25);
+}
+
 .grid-bg {
   background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
                     linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
