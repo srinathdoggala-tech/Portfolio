@@ -1,7 +1,5 @@
-@import "tailwindcss";
-
 /* ==========================================================================
-   DESIGN SYSTEM & VARIABLES (FROM BACKUP)
+   DESIGN SYSTEM & VARIABLES
    ========================================================================== */
 :root {
   /* Color Palette (Deep Space Theme) */
@@ -40,7 +38,9 @@
   --transition-fast: all 0.2s ease;
 }
 
-/* RESET & GLOBAL STYLES */
+/* ==========================================================================
+   RESET & GLOBAL STYLES
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -113,7 +113,9 @@ img {
   pointer-events: none;
 }
 
-/* REUSABLE UTILITIES */
+/* ==========================================================================
+   REUSABLE UTILITIES
+   ========================================================================== */
 .section {
   padding: 8rem 2rem;
   position: relative;
@@ -237,12 +239,19 @@ img {
 
 /* Scroll Reveal Elements */
 .reveal {
-  opacity: 1; /* Default visible in React / smoothly animated */
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* HEADER / NAVBAR */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   HEADER / NAVBAR
+   ========================================================================== */
 .navbar {
   position: fixed;
   top: 0;
@@ -331,7 +340,9 @@ img {
   transition: var(--transition-fast);
 }
 
-/* HERO SECTION */
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -378,7 +389,7 @@ img {
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-  height: 3.5rem;
+  height: 3.5rem; /* Prevents layout shifting during typing */
 }
 
 .cursor {
@@ -405,6 +416,7 @@ img {
   justify-content: center;
 }
 
+/* Mouse Scroll Indicator */
 .scroll-down-container {
   position: absolute;
   bottom: 2.5rem;
@@ -442,7 +454,9 @@ img {
   100% { transform: translate(-50%, 15px); opacity: 0; }
 }
 
-/* ABOUT SECTION */
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
@@ -602,7 +616,9 @@ img {
   box-shadow: 0 4px 20px rgba(127, 0, 255, 0.4);
 }
 
-/* SKILLS SECTION */
+/* ==========================================================================
+   SKILLS SECTION
+   ========================================================================== */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -629,6 +645,7 @@ img {
   height: 28px;
 }
 
+/* Glow bubbles behind category icons */
 .skill-icon-glow {
   position: absolute;
   width: 45px;
@@ -686,6 +703,7 @@ img {
   transform-origin: left;
 }
 
+/* Colors for progress bars */
 .purple-glow {
   background: linear-gradient(90deg, var(--accent-purple), #c084fc);
   box-shadow: 0 0 10px var(--accent-purple-glow);
@@ -703,7 +721,9 @@ img {
   box-shadow: 0 0 10px var(--accent-orange-glow);
 }
 
-/* PROJECTS SECTION */
+/* ==========================================================================
+   PROJECTS SECTION
+   ========================================================================== */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -752,6 +772,7 @@ img {
   transform: scale(1.15) rotate(5deg);
 }
 
+/* Gradient Themes for Projects */
 .purple-gradient {
   background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, #0d0f1a 100%);
   border-bottom: 1px solid rgba(139, 92, 246, 0.15);
@@ -850,7 +871,9 @@ img {
   transform: translateY(-2px);
 }
 
-/* CONTACT SECTION */
+/* ==========================================================================
+   CONTACT SECTION
+   ========================================================================== */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -900,6 +923,7 @@ img {
   color: #00f2fe;
 }
 
+/* Forms styling */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -933,6 +957,7 @@ textarea.form-input {
   box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
 }
 
+/* Floating labels effect */
 .form-label {
   position: absolute;
   left: 1rem;
@@ -962,7 +987,9 @@ textarea.form-input {
 .form-status.success { color: #10b981; }
 .form-status.error { color: #ef4444; }
 
-/* FOOTER SECTION */
+/* ==========================================================================
+   FOOTER SECTION
+   ========================================================================== */
 .footer {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 3rem 2rem;
@@ -995,7 +1022,9 @@ textarea.form-input {
   color: var(--text-primary);
 }
 
-/* EXPERIENCE SECTION */
+/* ==========================================================================
+   EXPERIENCE SECTION
+   ========================================================================== */
 .experience-timeline {
   display: flex;
   flex-direction: column;
@@ -1127,23 +1156,51 @@ textarea.form-input {
   }
 }
 
-/* RESPONSIVE MEDIA QUERIES */
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
 @media (max-width: 1024px) {
-  .hero-title { font-size: 3.5rem; }
-  .hero-subtitle { font-size: 1.8rem; }
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 900px) {
-  .section { padding: 6rem 1.5rem; }
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  
   .about-grid, .skills-grid, .projects-grid, .contact-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  .about-image-card { height: 420px; min-height: auto; }
-  .about-content-card { padding: 2rem !important; }
-  .facts-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .navbar { padding: 1.25rem 1.5rem; }
-  .mobile-toggle { display: flex; }
+
+  .about-image-card {
+    height: 420px;
+    min-height: auto;
+  }
+
+  .about-content-card {
+    padding: 2rem !important;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navbar {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .mobile-toggle {
+    display: flex;
+  }
+  
   .nav-links {
     position: fixed;
     top: 0;
@@ -1160,17 +1217,51 @@ textarea.form-input {
     transition: var(--transition-smooth);
     z-index: 99;
   }
-  .nav-links.active { right: 0; }
-  .mobile-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  .mobile-toggle.active .bar:nth-child(2) { opacity: 0; }
-  .mobile-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  
+  /* Mobile Hamburger Transformation */
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 2.75rem; }
-  .hero-subtitle { font-size: 1.4rem; height: auto; margin-bottom: 2.5rem; }
-  .hero-ctas { flex-direction: column; width: 100%; gap: 1rem; }
-  .btn { width: 100%; }
-  .project-content { padding: 1.5rem; }
-  .glass-card { padding: 1.75rem; }
+  .hero-title {
+    font-size: 2.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem;
+    height: auto;
+    margin-bottom: 2.5rem;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+  }
+  
+  .glass-card {
+    padding: 1.75rem;
+  }
 }
