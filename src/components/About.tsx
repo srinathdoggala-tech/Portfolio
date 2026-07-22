@@ -127,12 +127,9 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               {/* Premium abstract graphic avatar */}
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-gradient-to-tr from-accent-purple via-accent-blue to-accent-teal p-[2px]">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-black font-display text-2xl font-bold text-white">
-                  SD
-                </div>
-                {/* Visual pulse glow ring */}
-                <div className="absolute inset-0 rounded-full border border-white/20 animate-ping opacity-30" />
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-accent-purple/50 shadow-lg">
+                <img src="/profile.png" alt="Srinath Doggala" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 rounded-full border border-white/20 animate-ping opacity-30 pointer-events-none" />
               </div>
               <div>
                 <h4 className="font-display font-bold text-white light:text-slate-900">Srinath Doggala</h4>
