@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Award, ShieldAlert, GraduationCap, X, ChevronRight } from "lucide-react";
+import { Award, Trophy, GraduationCap, X, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Item {
@@ -90,7 +90,7 @@ export default function Achievements() {
       case "academic":
         return <GraduationCap className="h-5 w-5 text-accent-teal" />;
       case "award":
-        return <ShieldAlert className="h-5 w-5 text-accent-orange" />;
+        return <Trophy className="h-5 w-5 text-accent-orange" />;
     }
   };
 
