@@ -72,55 +72,57 @@ export default function About() {
         </div>
 
         {/* About Grid */}
-        <div className="grid gap-10 md:gap-12 lg:grid-cols-12">
-          {/* Text and Introduction card */}
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-12 items-stretch">
+          {/* Expanded Professional Background card */}
           <motion.div
-            className="lg:col-span-7 glass-card rounded-2xl p-8 md:p-10 flex flex-col justify-between"
+            className="lg:col-span-8 glass-card rounded-3xl p-10 sm:p-12 md:p-14 flex flex-col justify-between border border-white/10 shadow-2xl min-h-[480px]"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <User className="h-5 w-5 text-accent-purple" />
-                <h3 className="font-display text-xl font-bold text-white light:text-slate-950">Professional Background</h3>
+              <div className="flex items-center gap-3.5 mb-8">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-purple/10 border border-accent-purple/20 text-accent-purple">
+                  <User className="h-6 w-6" />
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-white light:text-slate-950">Professional Background</h3>
               </div>
-              <div className="font-sans text-slate-300 light:text-slate-600 space-y-4 leading-relaxed">
+              <div className="font-sans text-slate-200 light:text-slate-700 text-base md:text-lg space-y-6 leading-relaxed">
                 <p>
-                  I am a passionate <strong>AI Engineer and Software Developer</strong> focused on building intelligence-driven tools, scalable multi-agent systems, and production-ready full-stack applications.
+                  I am a passionate <strong>Founding AI &amp; Full Stack Engineer Intern</strong> and software developer focused on building intelligence-driven tools, scalable multi-agent systems, and production-ready full-stack applications.
                 </p>
                 <p>
-                  Currently pursuing my <strong>B.E. in Computer Science Engineering with a specialization in AI/ML</strong> at <strong>Chandigarh University</strong> (2023 - 2027), I combine core software engineering patterns with machine learning models to solve real problems.
+                  Currently pursuing my <strong>B.E. in Computer Science Engineering with a specialization in AI/ML</strong> at <strong>Chandigarh University</strong> (2023 - 2027), I combine core software engineering patterns with cutting-edge machine learning models to solve complex real-world problems.
                 </p>
                 <p>
-                  My experience includes building multi-agent AI systems, ATS resume matching systems, image classification workflows, and REST services using Python (FastAPI/Django) and React. I enjoy writing clean, high-performance, and maintainable code.
+                  My expertise spans autonomous multi-agent AI systems, semantic ATS resume evaluation pipelines, computer vision classifiers, and high-performance REST microservices using Python (FastAPI/Django) and Next.js.
                 </p>
               </div>
             </div>
 
             {/* Quick badges */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <span className="flex items-center gap-1.5 rounded-full bg-accent-purple/10 border border-accent-purple/20 px-3.5 py-1 text-xs font-semibold text-purple-300 light:text-purple-700">
-                <Cpu className="h-3.5 w-3.5" />
-                AI Specialists
+            <div className="mt-10 flex flex-wrap gap-3.5">
+              <span className="flex items-center gap-2 rounded-full bg-accent-purple/10 border border-accent-purple/25 px-4 py-2 text-xs font-semibold text-purple-300 light:text-purple-700">
+                <Cpu className="h-4 w-4 text-accent-purple" />
+                Agentic AI &amp; LLM Specialist
               </span>
-              <span className="flex items-center gap-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 px-3.5 py-1 text-xs font-semibold text-blue-300 light:text-blue-700">
-                <Shield className="h-3.5 w-3.5" />
-                Backend Focus
+              <span className="flex items-center gap-2 rounded-full bg-accent-blue/10 border border-accent-blue/25 px-4 py-2 text-xs font-semibold text-blue-300 light:text-blue-700">
+                <Shield className="h-4 w-4 text-accent-blue" />
+                Backend &amp; FastAPI Focus
               </span>
-              <span className="flex items-center gap-1.5 rounded-full bg-accent-teal/10 border border-accent-teal/20 px-3.5 py-1 text-xs font-semibold text-teal-300 light:text-teal-700">
-                <Target className="h-3.5 w-3.5" />
-                Full-Stack Ability
+              <span className="flex items-center gap-2 rounded-full bg-accent-teal/10 border border-accent-teal/25 px-4 py-2 text-xs font-semibold text-teal-300 light:text-teal-700">
+                <Target className="h-4 w-4 text-accent-teal" />
+                Full-Stack Next.js Architecture
               </span>
             </div>
           </motion.div>
 
           {/* Visual Avatar / Info and Stats Column */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className="lg:col-span-4 flex flex-col justify-between gap-6">
             {/* Styled Avatar Card */}
             <motion.div
-              className="glass-card rounded-2xl p-6 flex items-center gap-6"
+              className="glass-card rounded-3xl p-8 flex items-center gap-6 border border-white/10"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
