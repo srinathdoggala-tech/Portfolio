@@ -150,7 +150,7 @@ export default function Hero() {
 
         {/* Call to Action Actions */}
         <motion.div
-          className="mt-10 flex flex-wrap justify-center gap-5"
+          className="mt-8 flex flex-wrap justify-center gap-5"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -171,12 +171,46 @@ export default function Hero() {
           </a>
         </motion.div>
 
+        {/* AI Agent Code Terminal Widget */}
+        <motion.div
+          className="mt-12 w-full max-w-2xl rounded-2xl bg-black/60 border border-white/15 overflow-hidden shadow-2xl backdrop-blur-xl text-left light:bg-slate-900"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          {/* Terminal Window Header */}
+          <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-red-500/80" />
+              <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+              <div className="h-3 w-3 rounded-full bg-green-500/80" />
+            </div>
+            <span className="font-mono text-[11px] text-slate-400 font-medium">
+              srinath@agentic-core: ~/architecture
+            </span>
+            <div className="flex items-center gap-2 font-mono text-[10px] text-purple-300 bg-accent-purple/10 px-2 py-0.5 rounded">
+              Python 3.11 • Active
+            </div>
+          </div>
+          {/* Terminal Code Body */}
+          <div className="p-4 font-mono text-xs leading-relaxed text-slate-300 overflow-x-auto">
+            <p className="text-purple-400"># Multi-Agent Orchestration Engine (LangGraph DAG)</p>
+            <p className="text-slate-400"><span className="text-blue-400">from</span> langgraph.graph <span className="text-blue-400">import</span> StateGraph, END</p>
+            <p className="mt-1"><span className="text-blue-400">class</span> <span className="text-yellow-300">AgentState</span>(TypedDict):</p>
+            <p className="pl-4 text-slate-300">query: <span className="text-emerald-400">str</span> | verification_score: <span className="text-emerald-400">float</span> | report: <span className="text-emerald-400">str</span></p>
+            <p className="mt-1 text-slate-400"># Compile Graph: Planner -&gt; Researcher -&gt; Verifier -&gt; Writer</p>
+            <p><span className="text-teal-300">graph</span> = StateGraph(AgentState)</p>
+            <p><span className="text-teal-300">graph</span>.add_edge(<span className="text-amber-300">&quot;researcher&quot;</span>, <span className="text-amber-300">&quot;verifier&quot;</span>)</p>
+            <p className="text-emerald-400 mt-1">✔ Compiled 4-Agent DAG Loop • 0 Hallucinations Detected</p>
+          </div>
+        </motion.div>
+
         {/* Social Badges */}
         <motion.div
-          className="mt-12 flex items-center gap-6"
+          className="mt-8 flex items-center gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
           <a
             href="https://github.com/srinathdoggala-tech"
