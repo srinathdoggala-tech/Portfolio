@@ -2,7 +2,8 @@
 
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Github, ExternalLink, Sparkles, BookOpen, UserCheck, Flame } from "lucide-react";
+import { ExternalLink, Sparkles, BookOpen, UserCheck, Flame, Code } from "lucide-react";
+import { Github } from "@/components/Icons";
 
 interface ProjectItem {
   title: string;

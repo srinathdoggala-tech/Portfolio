@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Github, Linkedin, Mail, Code, ArrowDown, Sparkles } from "lucide-react";
+import { Mail, Code, ArrowDown, Sparkles } from "lucide-react";
+import { Github, Linkedin } from "@/components/Icons";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 

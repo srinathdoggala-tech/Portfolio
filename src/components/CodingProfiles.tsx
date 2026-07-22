@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Code2, Linkedin, Terminal, Flame, Zap } from "lucide-react";
+import { Code2, Terminal, Flame, Zap } from "lucide-react";
+import { Github, Linkedin } from "@/components/Icons";
 
 export default function CodingProfiles() {
   // Generate random days for GitHub contribution heatmap simulation

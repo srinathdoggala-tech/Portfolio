@@ -1,6 +1,7 @@
 "use client";
 
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { Mail, ArrowUp } from "lucide-react";
+import { Github, Linkedin } from "@/components/Icons";
 import { motion } from "framer-motion";
 
 export default function Footer() {
