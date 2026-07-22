@@ -92,15 +92,21 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
 
       <header className="fixed top-0 left-0 right-0 z-40 w-full glass-panel border-b border-white/5 shadow-md transition-all duration-300">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <a
-            href="#top"
-            className="font-display text-xl font-bold tracking-tight text-white dark:text-white light:text-slate-900 flex items-center gap-1.5"
-          >
-            <span className="text-accent-purple">&lt;</span>
-            <span className="light:text-slate-900 text-white">Srinath</span>
-            <span className="text-accent-blue">.tech /&gt;</span>
-          </a>
+          {/* Logo & Figma Canvas Badge */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#top"
+              className="font-display text-xl font-bold tracking-tight text-white dark:text-white light:text-slate-900 flex items-center gap-1.5"
+            >
+              <span className="text-accent-purple">&lt;</span>
+              <span className="light:text-slate-900 text-white">Srinath</span>
+              <span className="text-accent-blue">.tech /&gt;</span>
+            </a>
+            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-purple-500/25 bg-purple-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-purple-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Figma Canvas 100%
+            </span>
+          </div>
 
           {/* Desktop Links */}
           <nav className="hidden md:flex items-center gap-8">

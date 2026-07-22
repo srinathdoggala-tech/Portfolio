@@ -17,6 +17,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
 import RecruiterDrawer from "@/components/RecruiterDrawer";
+import FigmaMultiplayerCursors from "@/components/FigmaMultiplayerCursors";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,9 @@ export default function Home() {
         <div className="relative min-h-screen flex flex-col bg-bg-dark">
           {/* Interactive Background */}
           <InteractiveBackground />
+
+          {/* Figma-Style Canvas Multiplayer Cursors Overlay */}
+          <FigmaMultiplayerCursors />
 
           {/* Search Command Palette Overlay */}
           <CommandPalette isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
