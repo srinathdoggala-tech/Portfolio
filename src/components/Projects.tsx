@@ -144,64 +144,68 @@ function TiltCard({ project }: { project: ProjectItem }) {
     >
       <motion.div
         style={{ rotateX, rotateY }}
-        className="glass-card flex flex-col h-full rounded-2xl p-8 md:p-10 border border-white/10 dark:border-white/10 light:border-slate-200 transition-all shadow-lg justify-between gap-6"
+        className="glass-card relative flex flex-col justify-between h-full rounded-2xl p-7 sm:p-8 border border-white/10 dark:border-white/10 light:border-slate-200 transition-all shadow-xl gap-5 overflow-hidden"
       >
-        {/* Project Accent Header Glow */}
-        <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${project.accent}`} />
+        {/* Project Accent Header Glow Line */}
+        <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${project.accent}`} />
 
-        {/* Header section */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="rounded-lg bg-white/5 p-2.5 text-accent-purple light:bg-slate-100">
-            {project.icon}
+        <div className="flex flex-col pt-1">
+          {/* Header section (Icon + Links) */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-white/5 border border-white/10 text-accent-purple light:bg-slate-100 shadow-sm">
+              {project.icon}
+            </div>
+            <div className="flex items-center gap-2.5">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:border-accent-purple/50 hover:bg-accent-purple/10 hover:text-white light:border-slate-300 light:bg-slate-100 light:text-slate-700 transition-all"
+                title="GitHub Repository"
+              >
+                <Github className="h-4.5 w-4.5" />
+              </a>
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:border-accent-blue/50 hover:bg-accent-blue/10 hover:text-white light:border-slate-300 light:bg-slate-100 light:text-slate-700 transition-all"
+                title="Live Demo"
+              >
+                <ExternalLink className="h-4.5 w-4.5" />
+              </a>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white light:text-slate-500 light:hover:text-slate-900 transition-colors"
-              title="GitHub Repository"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white light:text-slate-500 light:hover:text-slate-900 transition-colors"
-              title="Live Demo"
-            >
-              <ExternalLink className="h-5 w-5" />
-            </a>
+
+          {/* Title & Description */}
+          <h3 className="font-display text-xl font-bold text-white light:text-slate-900 group-hover:text-accent-purple transition-colors mb-3 leading-snug">
+            {project.title}
+          </h3>
+          <p className="font-sans text-sm leading-relaxed text-slate-300 light:text-slate-600 mb-5">
+            {project.description}
+          </p>
+
+          {/* Tech Stack Badges */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md bg-accent-purple/10 border border-accent-purple/20 px-2.5 py-1 text-[11px] font-mono font-medium text-purple-300 light:bg-purple-50 light:text-purple-700"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
-        </div>
-
-        {/* Title & Description */}
-        <h3 className="font-display text-xl font-bold text-white light:text-slate-900 group-hover:text-accent-purple transition-colors mb-2">
-          {project.title}
-        </h3>
-        <p className="font-sans text-sm leading-relaxed text-slate-300 light:text-slate-600 mb-6 flex-1">
-          {project.description}
-        </p>
-
-        {/* Tech Stack Badges */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded bg-accent-purple/5 border border-accent-purple/10 px-2 py-0.5 text-[10px] font-mono font-medium text-purple-300 light:text-purple-700"
-            >
-              {tag}
-            </span>
-          ))}
         </div>
 
         {/* Impact List */}
-        <div className="border-t border-white/5 pt-4 light:border-slate-200">
-          <h4 className="font-display text-xs font-bold uppercase tracking-wider text-slate-400 light:text-slate-500 mb-2">Key Achievements</h4>
-          <ul className="space-y-1.5 font-sans text-xs text-slate-400 light:text-slate-600">
+        <div className="border-t border-white/10 pt-4 light:border-slate-200 mt-auto">
+          <h4 className="font-display text-xs font-bold uppercase tracking-wider text-slate-400 light:text-slate-500 mb-2.5">
+            Key Achievements
+          </h4>
+          <ul className="space-y-2 font-sans text-xs text-slate-300 light:text-slate-600 pl-4 list-disc leading-relaxed">
             {project.achievements.map((ach, idx) => (
-              <li key={idx} className="list-disc list-inside">
+              <li key={idx} className="pl-1">
                 {ach}
               </li>
             ))}
