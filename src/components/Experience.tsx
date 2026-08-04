@@ -13,12 +13,12 @@ export const Experience: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Briefcase className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Briefcase className="w-3.5 h-3.5 text-amber-400" />
             <span>WORK EXPERIENCE &amp; IMPACT</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Production Engineering <span className="gradient-text-apple">Experience</span>
+            Production Engineering <span className="gradient-text-gold">Experience</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             Hands-on software engineering delivering high-performance backend microservices and AI application workflows.
@@ -26,7 +26,7 @@ export const Experience: React.FC = () => {
         </div>
 
         {/* Timeline List */}
-        <div className="max-w-4xl mx-auto relative pl-6 sm:pl-8 border-l border-white/10 space-y-12">
+        <div className="max-w-4xl mx-auto relative pl-6 sm:pl-8 border-l border-amber-500/20 space-y-12">
           {EXPERIENCES.map((exp, index) => {
             const isExpanded = expandedId === exp.id;
             return (
@@ -39,12 +39,12 @@ export const Experience: React.FC = () => {
                 className="relative group"
               >
                 {/* Timeline Dot Badge */}
-                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-6 h-6 rounded-full bg-[#030712] border-2 border-blue-500 flex items-center justify-center group-hover:border-purple-400 transition-colors shadow-lg">
-                  <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-6 h-6 rounded-full bg-[#030712] border-2 border-amber-400 flex items-center justify-center group-hover:border-amber-300 transition-colors shadow-lg">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                 </div>
 
                 {/* Experience Card */}
-                <div className="glass-panel rounded-3xl border border-white/15 overflow-hidden transition-all duration-300 hover:border-blue-500/40">
+                <div className="glass-panel rounded-3xl border border-amber-500/20 bg-amber-950/10 overflow-hidden transition-all duration-300 hover:border-amber-400/50">
                   {/* Card Header Bar */}
                   <div
                     onClick={() => setExpandedId(isExpanded ? null : exp.id)}
@@ -52,7 +52,7 @@ export const Experience: React.FC = () => {
                   >
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="px-3 py-1 text-xs font-mono font-bold text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+                        <span className="px-3 py-1 text-xs font-mono font-bold text-amber-300 bg-amber-950/40 rounded-full border border-amber-500/30">
                           {exp.type}
                         </span>
                         <span className="text-xs text-gray-400 flex items-center gap-1">

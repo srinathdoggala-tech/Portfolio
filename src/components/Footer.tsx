@@ -7,13 +7,13 @@ import { PERSONAL_INFO } from "../lib/data";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative z-10 border-t border-white/10 bg-[#030712]/90 py-12">
+    <footer className="relative z-10 border-t border-amber-500/20 bg-[#030712]/95 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand & Subtitle */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-600 p-[1px]">
-              <div className="w-full h-full bg-[#030712] rounded-[7px] flex items-center justify-center font-mono text-xs font-bold text-white">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-400 to-yellow-500 p-[1px]">
+              <div className="w-full h-full bg-[#030712] rounded-[7px] flex items-center justify-center font-mono text-xs font-bold text-amber-300">
                 SD
               </div>
             </div>
@@ -26,11 +26,11 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Operational Status Pill */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border border-white/10 text-xs font-mono text-gray-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border border-amber-500/20 text-xs font-mono text-gray-400">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             <span>All Systems Operational</span>
             <span className="text-gray-600">•</span>
-            <span className="text-blue-400">Next.js 15 App Router</span>
+            <span className="text-amber-300">Next.js 16 App Router</span>
           </div>
 
           {/* Social Icons */}

@@ -55,12 +55,12 @@ export const TechStackEcosystem: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Layers className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Layers className="w-3.5 h-3.5 text-amber-400" />
             <span>FULL STACK SYSTEM ARCHITECTURE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Interactive System <span className="gradient-text-purple">Ecosystem</span>
+            Interactive System <span className="gradient-text-gold">Ecosystem</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             How client frontends, asynchronous API backends, multi-agent LLMs, and databases connect in my architecture.
@@ -80,8 +80,8 @@ export const TechStackEcosystem: React.FC = () => {
                   onClick={() => setActiveLayer(layer.id)}
                   className={`w-full text-left p-4 rounded-2xl glass-panel transition-all flex items-center justify-between border ${
                     isActive
-                      ? "border-blue-500/50 bg-blue-600/15 shadow-xl"
-                      : "border-white/10 hover:border-white/20 hover:bg-white/5"
+                      ? "border-amber-500/50 bg-amber-950/30 shadow-xl text-amber-300"
+                      : "border-amber-500/10 hover:border-amber-400/40 hover:bg-amber-950/10 text-gray-300"
                   }`}
                 >
                   <div className="flex items-center gap-3">

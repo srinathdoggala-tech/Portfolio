@@ -67,7 +67,7 @@ export const PERSONAL_INFO = {
   phone: "+91-7569656550",
   email: "doggalasrinath@gmail.com",
   github: "https://github.com/srinathdoggala",
-  linkedin: "https://linkedin.com/in/srinathdoggala",
+  linkedin: "www.linkedin.com/in/srinath-doggala-081083286",
   portfolio: "https://srinathdoggala.tech",
   resumeUrl: "#contact",
   availabilityStatus: "Available for AI & Full Stack Roles",

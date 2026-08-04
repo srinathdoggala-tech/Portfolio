@@ -2,12 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Menu, X, FileText, Sparkles, ChevronRight } from "lucide-react";
+import { Search, Menu, X, FileText, Sparkles, ChevronRight, Terminal, Trophy } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { PERSONAL_INFO } from "../lib/data";
 
 interface NavbarProps {
   onOpenCommandPalette: () => void;
+  onOpenTerminal?: () => void;
+  onOpenTrophyModal?: () => void;
+  unlockedCount?: number;
 }
 
 const NAV_LINKS = [
@@ -21,7 +24,12 @@ const NAV_LINKS = [
   { name: "Contact", href: "#contact" },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenCommandPalette,
+  onOpenTerminal,
+  onOpenTrophyModal,
+  unlockedCount = 0,
+}) => {
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -59,24 +67,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#hero" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-600 p-[1px] shadow-lg group-hover:shadow-blue-500/30 transition-all">
-            <div className="w-full h-full bg-[#030712] rounded-[11px] flex items-center justify-center font-bold font-mono text-sm text-white group-hover:bg-transparent transition-colors">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 via-yellow-500 to-cyan-500 p-[1px] shadow-lg group-hover:shadow-amber-500/40 transition-all">
+            <div className="w-full h-full bg-[#030712] rounded-[11px] flex items-center justify-center font-bold font-mono text-sm text-amber-300 group-hover:bg-transparent group-hover:text-black transition-colors">
               SD
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-base tracking-tight text-white group-hover:text-blue-400 transition-colors">
+            <span className="font-bold text-base tracking-tight text-white group-hover:text-amber-400 transition-colors">
               Srinath Doggala
             </span>
-            <span className="text-[10px] tracking-wider font-mono text-gray-400 uppercase flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] tracking-wider font-mono text-amber-400/90 uppercase flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               AI Engineer
             </span>
           </div>
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 glass-pill px-3 py-1.5 rounded-full border border-white/10 shadow-inner">
+        <nav className="hidden lg:flex items-center gap-1 glass-pill px-3 py-1.5 rounded-full border border-amber-500/20 shadow-inner">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.substring(1);
             return (
@@ -84,13 +92,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 key={link.name}
                 href={link.href}
                 className={`relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-all ${
-                  isActive ? "text-white font-semibold" : "text-gray-400 hover:text-gray-200"
+                  isActive ? "text-amber-300 font-semibold" : "text-gray-400 hover:text-gray-200"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeNavBackground"
-                    className="absolute inset-0 bg-blue-600/30 border border-blue-500/40 rounded-full"
+                    className="absolute inset-0 bg-amber-500/20 border border-amber-500/40 rounded-full"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -101,16 +109,44 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </nav>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Developer CLI Terminal Trigger */}
+          {onOpenTerminal && (
+            <button
+              onClick={onOpenTerminal}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono text-cyan-300 bg-cyan-950/40 rounded-full border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-950/80 transition-all group"
+              title="Open Terminal Shell (Ctrl+~)"
+            >
+              <Terminal className="w-3.5 h-3.5 text-cyan-400 group-hover:animate-pulse" />
+              <span className="hidden sm:inline font-bold">&gt;_</span>
+            </button>
+          )}
+
+          {/* Trophy Case Trigger */}
+          {onOpenTrophyModal && (
+            <button
+              onClick={onOpenTrophyModal}
+              className="relative flex items-center justify-center p-2 text-yellow-400 bg-yellow-950/30 rounded-full border border-yellow-500/30 hover:border-yellow-400 hover:bg-yellow-950/60 transition-all"
+              title="Open Trophy Case"
+            >
+              <Trophy className="w-3.5 h-3.5" />
+              {unlockedCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-400 text-gray-950 font-bold text-[10px] flex items-center justify-center border border-gray-950 shadow-sm">
+                  {unlockedCount}
+                </span>
+              )}
+            </button>
+          )}
+
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs text-gray-300 glass-panel rounded-full border border-white/15 hover:border-blue-500/50 hover:bg-white/5 transition-all shadow-sm group"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs text-gray-300 glass-panel rounded-full border border-amber-500/20 hover:border-amber-400/50 hover:bg-amber-950/20 transition-all shadow-sm group"
             title="Open Command Palette (Ctrl+K)"
           >
-            <Search className="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+            <Search className="w-3.5 h-3.5 text-gray-400 group-hover:text-amber-400 transition-colors" />
             <span className="hidden sm:inline">Search</span>
-            <kbd className="px-1.5 py-0.5 text-[10px] font-mono text-gray-400 bg-white/10 rounded border border-white/10 group-hover:border-blue-500/30">
+            <kbd className="px-1.5 py-0.5 text-[10px] font-mono text-gray-400 bg-white/10 rounded border border-white/10 group-hover:border-amber-500/30">
               ⌘K
             </kbd>
           </button>
@@ -118,9 +154,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           {/* Resume Download CTA */}
           <a
             href="#contact"
-            className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium text-white rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-blue-500/25 transition-all"
+            className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-gray-950 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 shadow-lg shadow-amber-500/25 transition-all"
           >
-            <FileText className="w-3.5 h-3.5" />
+            <FileText className="w-3.5 h-3.5 text-gray-950" />
             <span>Resume</span>
           </a>
 

@@ -11,12 +11,12 @@ export const Certifications: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Award className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Award className="w-3.5 h-3.5 text-amber-400" />
             <span>VERIFIED ACADEMIC &amp; INDUSTRY CREDENTIALS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Professional <span className="gradient-text-apple">Certifications</span>
+            Professional <span className="gradient-text-gold">Certifications</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             Validated technical expertise in Google Cloud AI, Generative AI, Machine Learning, and Database SQL Architecture.
@@ -32,17 +32,17 @@ export const Certifications: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-white/15 space-y-4 relative overflow-hidden flex flex-col justify-between group"
+              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-amber-500/20 bg-amber-950/10 space-y-4 relative overflow-hidden flex flex-col justify-between group hover:border-amber-400/50"
             >
               {/* Subtle Badge Gradient accent */}
               <div className={`absolute top-0 right-0 w-28 h-28 bg-gradient-to-br ${cert.badgeColor} opacity-10 rounded-full blur-xl group-hover:opacity-25 transition-opacity`} />
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 text-xs font-mono font-bold text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+                  <span className="px-3 py-1 text-xs font-mono font-bold text-amber-300 bg-amber-950/40 rounded-full border border-amber-500/30">
                     {cert.issuer}
                   </span>
-                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                  <ShieldCheck className="w-5 h-5 text-cyan-400" />
                 </div>
 
                 <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors leading-snug">

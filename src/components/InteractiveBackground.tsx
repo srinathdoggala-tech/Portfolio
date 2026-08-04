@@ -131,9 +131,9 @@ export const InteractiveBackground: React.FC = () => {
       <div className="absolute inset-0 bg-noise pointer-events-none" />
 
       {/* Ambient Aurora Glow Spheres */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-[128px] animate-float-slow" />
-      <div className="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-purple-600/15 rounded-full blur-[140px] animate-float-reverse" />
-      <div className="absolute -bottom-40 left-1/3 w-[32rem] h-[32rem] bg-indigo-600/15 rounded-full blur-[150px] animate-pulse-glow" />
+      <div className="absolute -top-40 -left-40 w-[32rem] h-[32rem] bg-amber-600/15 rounded-full blur-[140px] animate-float-slow" />
+      <div className="absolute top-1/3 -right-40 w-[34rem] h-[34rem] bg-cyan-600/12 rounded-full blur-[150px] animate-float-reverse" />
+      <div className="absolute -bottom-40 left-1/3 w-[36rem] h-[36rem] bg-indigo-700/15 rounded-full blur-[160px] animate-pulse-glow" />
     </div>
   );
 };

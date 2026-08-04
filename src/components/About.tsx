@@ -34,12 +34,12 @@ export const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>ABOUT &amp; ENGINEERING MINDSET</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Crafting Scalable AI &amp; <span className="gradient-text-purple">Full Stack Systems</span>
+            Crafting Scalable AI &amp; <span className="gradient-text-gold">Full Stack Systems</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
             I am a Computer Science Engineering student specialized in AI/ML and a Founding AI Full Stack Engineer Intern at Sreeva AI. My focus is engineering production-grade software that combines modern user interfaces with intelligent backend architectures.
@@ -55,16 +55,14 @@ export const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-white/10 relative overflow-hidden group"
+              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-amber-500/20 hover:border-amber-400/50 bg-amber-950/10 relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all" />
-              <div className="space-y-2">
-                <span className="text-4xl sm:text-5xl font-extrabold font-mono text-white tracking-tight group-hover:text-blue-400 transition-colors">
-                  {stat.value}
-                </span>
-                <h3 className="text-base font-semibold text-gray-200">{stat.label}</h3>
-                <p className="text-xs text-gray-400 font-mono">{stat.subtext}</p>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition-all" />
+              <div className="text-3xl font-extrabold text-amber-300 font-mono tracking-tight group-hover:scale-105 transition-transform">
+                {stat.value}
               </div>
+              <div className="text-sm font-semibold text-gray-200 mt-2">{stat.label}</div>
+              <div className="text-xs text-gray-400 mt-1 leading-snug">{stat.subtext}</div>
             </motion.div>
           ))}
         </div>
@@ -72,21 +70,21 @@ export const About: React.FC = () => {
         {/* Story & Engineering Values Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Bio Story Card */}
-          <div className="lg:col-span-5 glass-panel p-8 rounded-3xl border border-white/15 space-y-6 relative overflow-hidden">
+          <div className="lg:col-span-5 glass-panel p-8 rounded-3xl border border-amber-500/20 bg-amber-950/10 space-y-6 relative overflow-hidden">
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-                <Code2 className="w-6 h-6 text-blue-400" />
+                <Code2 className="w-6 h-6 text-amber-400" />
                 The Engineering Narrative
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed">
-                As an engineer, I view software through both an algorithmic and product lens. At <strong className="text-white">Sreeva AI</strong>, I build full-stack features, asynchronous FastAPI pipelines, and Redis caching systems that reduced API latency by 35%.
+                As an engineer, I view software through both an algorithmic and product lens. At <strong className="text-amber-200">Sreeva AI</strong>, I build full-stack features, asynchronous FastAPI pipelines, and Redis caching systems that reduced API latency by 35%.
               </p>
               <p className="text-gray-300 text-sm leading-relaxed">
-                My project work ranges from autonomous multi-agent research swarms (<strong className="text-white">ResearchGPT</strong>) to AI-powered code review engines (<strong className="text-white">ReviewGPT</strong>), stress-testing AI ATS platforms on <strong className="text-white">500+ resumes</strong> (<strong className="text-white">TalentLens AI</strong>), and edge computer vision inference (<strong className="text-white">MobileNetV2 Fruit/Veg AI</strong>).
+                My project work ranges from autonomous multi-agent research swarms (<strong className="text-cyan-300">ResearchGPT</strong>) to AI-powered code review engines (<strong className="text-cyan-300">ReviewGPT</strong>), stress-testing AI ATS platforms on <strong className="text-amber-200">500+ resumes</strong> (<strong className="text-cyan-300">TalentLens AI</strong>), and edge computer vision inference (<strong className="text-amber-200">MobileNetV2 Fruit/Veg AI</strong>).
               </p>
             </div>
 
-            <div className="pt-4 border-t border-white/10 space-y-3 text-xs font-mono text-gray-400">
+            <div className="pt-4 border-t border-amber-500/20 space-y-3 text-xs font-mono text-gray-400">
               <div className="flex items-center justify-between">
                 <span>Location:</span>
                 <span className="text-white">{PERSONAL_INFO.location}</span>
@@ -97,7 +95,7 @@ export const About: React.FC = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span>Current Role:</span>
-                <span className="text-emerald-400 font-medium">Founding AI Full Stack Intern @ Sreeva AI</span>
+                <span className="text-amber-300 font-medium">Founding AI Full Stack Intern @ Sreeva AI</span>
               </div>
             </div>
           </div>
@@ -113,9 +111,9 @@ export const About: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="glass-panel glass-panel-hover p-6 rounded-2xl border border-white/10 space-y-3"
+                  className="glass-panel glass-panel-hover p-6 rounded-2xl border border-amber-500/20 hover:border-amber-400/50 bg-amber-950/10 space-y-3"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-bold text-white">{val.title}</h4>

@@ -14,12 +14,12 @@ export const Projects: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Code2 className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Code2 className="w-3.5 h-3.5 text-amber-400" />
             <span>FEATURED AI &amp; FULL STACK PROJECTS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Production-Ready <span className="gradient-text-apple">AI Architectures</span>
+            Production-Ready <span className="gradient-text-gold">AI Architectures</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             Every project is engineered with full-stack completeness, rigorous state management, and production AI pipelines.
@@ -36,30 +36,30 @@ export const Projects: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="glass-panel rounded-3xl border border-white/15 overflow-hidden shadow-2xl transition-all duration-300 hover:border-blue-500/40 relative group"
+              className="glass-panel rounded-3xl border border-amber-500/20 bg-amber-950/10 overflow-hidden shadow-2xl transition-all duration-300 hover:border-amber-400/50 relative group"
             >
               {/* Outer Subtle Radial Background Glow */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-purple-600/15 transition-all" />
+              <div className="absolute top-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-cyan-600/15 transition-all" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-10 items-center">
                 {/* Left Info Column */}
                 <div className="lg:col-span-7 space-y-6">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="px-3 py-1 text-xs font-mono font-bold text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+                    <span className="px-3 py-1 text-xs font-mono font-bold text-amber-300 bg-amber-950/40 rounded-full border border-amber-500/30">
                       {project.category}
                     </span>
                     <span className="text-xs font-mono text-gray-400">{project.year}</span>
-                    <span className="text-xs font-mono text-emerald-400 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-xs font-mono text-cyan-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                       Production Architecture
                     </span>
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-blue-300 transition-colors">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-amber-300 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-blue-400 text-sm font-medium font-mono">
+                    <p className="text-amber-300/90 text-sm font-medium font-mono">
                       {project.tagline}
                     </p>
                   </div>

@@ -46,12 +46,12 @@ export const Skills: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-blue-500/30 text-xs font-mono font-medium text-blue-400">
-            <Cpu className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
+            <Cpu className="w-3.5 h-3.5 text-amber-400" />
             <span>TECHNICAL CAPABILITIES &amp; CS CORE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Engineering &amp; Technology <span className="gradient-text-emerald">Stack</span>
+            Engineering &amp; Technology <span className="gradient-text-gold">Stack</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             Production technology skills across AI orchestration, asynchronous backend systems, modern web frontends, and core computer science fundamentals.
@@ -59,16 +59,16 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl glass-panel border border-white/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl glass-panel border border-amber-500/20 bg-amber-950/10">
           {/* Search Box */}
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search skills (e.g. FastAPI, LangChain, React)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-white/10 focus:outline-none focus:border-blue-500/50"
+              className="w-full pl-10 pr-4 py-2 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60"
             />
           </div>
 
@@ -82,8 +82,8 @@ export const Skills: React.FC = () => {
                   onClick={() => setSelectedCategory(catName)}
                   className={`px-3 py-1.5 text-xs font-mono rounded-xl transition-all ${
                     isSelected
-                      ? "bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/20"
-                      : "text-gray-400 hover:text-white glass-panel border border-white/5"
+                      ? "bg-amber-500 text-gray-950 font-bold shadow-md shadow-amber-500/20"
+                      : "text-gray-400 hover:text-white glass-panel border border-amber-500/20"
                   }`}
                 >
                   {catName}
@@ -96,7 +96,7 @@ export const Skills: React.FC = () => {
         {/* Skills Cards Grid */}
         <div className="space-y-12">
           {filteredCategories.length === 0 ? (
-            <div className="p-12 text-center text-gray-400 font-mono text-sm glass-panel rounded-2xl border border-white/10">
+            <div className="p-12 text-center text-gray-400 font-mono text-sm glass-panel rounded-2xl border border-amber-500/20">
               No skills found matching &quot;{searchQuery}&quot;. Try resetting your search filter.
             </div>
           ) : (
@@ -106,8 +106,8 @@ export const Skills: React.FC = () => {
               return (
                 <div key={category.title} className="space-y-4">
                   {/* Category Title Header */}
-                  <div className="flex items-center gap-3 pb-2 border-b border-white/10">
-                    <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  <div className="flex items-center gap-3 pb-2 border-b border-amber-500/20">
+                    <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h3 className="text-xl font-bold text-white">{category.title}</h3>
