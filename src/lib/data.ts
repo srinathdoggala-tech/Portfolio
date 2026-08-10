@@ -152,7 +152,7 @@ export const PROJECTS: Project[] = [
     ],
     technologies: ["Python", "FastAPI", "React.js", "LLMs", "RAG", "LangChain", "WebSockets", "Vector Search", "Docker"],
     githubUrl: "https://github.com/srinathdoggala-tech/voxpilot",
-    liveUrl: "",
+    liveUrl: "https://voxpilot-two.vercel.app/",
     featured: true
   },
   {
