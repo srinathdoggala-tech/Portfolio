@@ -13,11 +13,15 @@ import {
   Gauge,
   FileCheck2,
   Bot,
+  MapPin,
+  GraduationCap,
+  Briefcase,
+  Star,
 } from "lucide-react";
+import Image from "next/image";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { PERSONAL_INFO } from "../lib/data";
 import { LiveStatusWidget } from "./LiveStatusWidget";
-import { InteractiveIDECard } from "./InteractiveIDECard";
 import { CompanyMarquee } from "./CompanyMarquee";
 
 const ROTATING_TITLES = [
@@ -105,7 +109,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
               </a>
 
               <a
-                href="#contact"
+                href="/resume.pdf"
+                download="Srinath_Doggala_Resume.pdf"
                 className="inline-flex items-center justify-center px-6 py-3.5 text-sm font-semibold text-gray-200 glass-panel rounded-xl border border-amber-500/20 hover:border-amber-400/50 hover:bg-amber-950/20 transition-all duration-200"
               >
                 <FileText className="w-4 h-4 mr-2 text-amber-400" />
@@ -187,14 +192,103 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
             </div>
           </motion.div>
 
-          {/* Right Column: Multi-Tab Interactive IDE Card */}
+          {/* Right Column: Professional Profile Photo Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex justify-center"
+            initial={{ opacity: 0, scale: 0.92, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 flex justify-center items-center"
           >
-            <InteractiveIDECard />
+            <div className="profile-card-container relative w-full max-w-sm">
+              {/* Outer glow rings */}
+              <div className="absolute inset-0 profile-ring-outer rounded-3xl" />
+              <div className="absolute inset-2 profile-ring-inner rounded-2xl" />
+
+              {/* Main Profile Card */}
+              <div className="relative glass-panel rounded-3xl border border-amber-500/30 overflow-hidden p-6 space-y-5 bg-gradient-to-b from-amber-950/20 to-slate-950/40">
+                {/* Ambient glow behind photo */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-48 h-48 bg-cyan-500/8 rounded-full blur-3xl pointer-events-none" />
+
+                {/* Profile Photo */}
+                <div className="relative flex justify-center">
+                  <div className="profile-photo-wrapper relative">
+                    {/* Animated border ring */}
+                    <div className="profile-photo-ring absolute inset-0 rounded-full" />
+                    {/* Subtle gold accent arc */}
+                    <div className="profile-photo-arc absolute inset-0 rounded-full" />
+                    <div className="relative w-44 h-44 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-amber-900/30">
+                      <Image
+                        src="/profile.jpg"
+                        alt="Srinath Doggala — AI Engineer & Full Stack Architect"
+                        fill
+                        className="object-cover object-top"
+                        priority
+                        sizes="(max-width: 768px) 176px, 176px"
+                      />
+                    </div>
+                    {/* Online indicator badge */}
+                    <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-sm border border-emerald-500/40 rounded-full px-2.5 py-1 shadow-lg">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-md shadow-emerald-400/50" />
+                      <span className="text-[10px] font-mono font-semibold text-emerald-300">OPEN TO WORK</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Name & Title */}
+                <div className="text-center space-y-1 relative">
+                  <h2 className="text-xl font-extrabold text-white tracking-tight">Srinath Doggala</h2>
+                  <p className="text-xs font-mono text-amber-300/90 leading-snug">
+                    AI Engineer · Full Stack Architect
+                  </p>
+                </div>
+
+                {/* Info Pills */}
+                <div className="flex flex-col gap-2 relative">
+                  <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                    <MapPin className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                    <span className="text-xs text-gray-300">Hyderabad, India</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                    <Briefcase className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+                    <span className="text-xs text-gray-300">Founding AI Intern @ Sreeva AI</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                    <GraduationCap className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
+                    <span className="text-xs text-gray-300">B.E. CS (AI/ML) · CU 2027</span>
+                  </div>
+                </div>
+
+                {/* Specialty Tags */}
+                <div className="flex flex-wrap gap-1.5 relative justify-center">
+                  {["FastAPI", "LangChain", "React", "PostgreSQL", "Docker"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-0.5 text-[10px] font-mono font-semibold rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Rating / Score bar */}
+                <div className="relative space-y-2 pt-1 border-t border-white/[0.06]">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-gray-500 font-mono">Academic Score</span>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                      <span className="text-amber-300 font-bold font-mono">97.5%</span>
+                    </div>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-amber-400 to-yellow-300"
+                      style={{ width: "97.5%" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 

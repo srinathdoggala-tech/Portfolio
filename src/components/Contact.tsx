@@ -24,6 +24,16 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
+    // Build mailto link and open it — messages land directly in inbox
+    const subject = encodeURIComponent(
+      formState.subject || `Portfolio Contact from ${formState.name}`
+    );
+    const body = encodeURIComponent(
+      `Hi Srinath,\n\n${formState.message}\n\n---\nFrom: ${formState.name}\nEmail: ${formState.email}`
+    );
+    const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+    window.open(mailtoLink, "_blank");
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -32,7 +42,7 @@ export const Contact: React.FC = () => {
         spread: 70,
         origin: { y: 0.6 },
       });
-    }, 1000);
+    }, 800);
   };
 
   const handleCopyEmail = () => {
@@ -110,11 +120,11 @@ export const Contact: React.FC = () => {
                 Download my verified resume containing all project architectures and metrics.
               </p>
               <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-lg shadow-blue-500/20 transition-all"
+                href="/resume.pdf"
+                download="Srinath_Doggala_Resume.pdf"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-gray-950 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 rounded-xl shadow-lg shadow-amber-500/25 transition-all"
               >
+                <FileText className="w-3.5 h-3.5" />
                 <span>Download Resume (PDF)</span>
               </a>
             </div>

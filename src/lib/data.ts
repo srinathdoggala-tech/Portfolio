@@ -67,9 +67,9 @@ export const PERSONAL_INFO = {
   phone: "+91-7569656550",
   email: "doggalasrinath@gmail.com",
   github: "https://github.com/srinathdoggala",
-  linkedin: "www.linkedin.com/in/srinath-doggala-081083286",
+  linkedin: "https://www.linkedin.com/in/srinath-doggala-081083286",
   portfolio: "https://srinathdoggala.tech",
-  resumeUrl: "#contact",
+  resumeUrl: "/resume.pdf",
   availabilityStatus: "Available for AI & Full Stack Roles",
   targetCompanies: [
     "OpenAI", "Anthropic", "Google DeepMind", "Microsoft AI", "Meta", "Apple",
@@ -113,45 +113,46 @@ export const EXPERIENCES: ExperienceItem[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: "review-gpt",
-    title: "ReviewGPT: AI-Powered Code Review Platform",
-    tagline: "Automated GitHub repository scanner combining static AST code analysis & Gemini AI for deep bug, security, and complexity audits.",
-    category: "Full Stack AI",
+    id: "voxpilot-ai",
+    title: "VoxPilot AI: Real-Time Voice Agent Platform",
+    tagline: "Real-time voice AI platform with adaptive model routing, multi-agent supervision, and RAG-powered knowledge workflows.",
+    category: "AI / Multi-Agent",
     year: "2026",
-    description: "Built an AI-powered GitHub repository analysis platform using React, Vite, FastAPI, Python, and Google Gemini 2.5 Flash to perform automated code reviews, security vulnerability audits, cyclomatic complexity metrics, and AI refactoring suggestions.",
-    longDescription: "ReviewGPT bridges static code analysis and Large Language Models to provide actionable repository health insights before code reaches production. Combining GitHub REST API ingestion, custom AST analyzers, and Gemini 2.5 Flash, it identifies bugs, hardcoded secrets, SQL injection patterns, XSS risks, cyclomatic complexity hotspots, and generates AI refactoring recommendations with automated code explanations.",
+    description: "Engineered a real-time voice AI platform with adaptive model routing, provider health monitoring, multi-agent supervision, and RAG workflows using Python, FastAPI, React.js, and LLMs.",
+    longDescription: "VoxPilot AI is a production-grade voice agent platform that orchestrates real-time speech interactions through adaptive LLM routing and multi-agent supervision. It combines deterministic safety controls, RAG-based knowledge retrieval, and comprehensive observability tooling — session replay, cost tracking, and failure recovery — to deliver stable, measurable AI behavior at scale.",
     architecture: {
-      title: "Repository Scanner & LLM Analysis Pipeline",
+      title: "Real-Time Voice Agent Orchestration Pipeline",
       steps: [
-        { step: "1. GitHub REST API Ingestion", detail: "Scans public GitHub repositories, retrieving multi-branch structures and source file AST representations." },
-        { step: "2. Static Code Analyzer", detail: "Runs AST static checks for cyclomatic complexity, security risks (SQLi, XSS, exposed keys), and boundary bugs." },
-        { step: "3. Gemini 2.5 Flash Engine", detail: "Prompts Google Gemini 2.5 Flash to generate contextual code explanations, quality metrics, and refactoring fixes." },
-        { step: "4. ReviewGPT Dashboard", detail: "Renders real-time repository health score, issue distribution, file complexity metrics, and AI assistant UI." }
+        { step: "1. Adaptive Model Router", detail: "Dynamically routes voice queries to optimal LLM providers based on real-time health monitoring, latency, and cost signals." },
+        { step: "2. Multi-Agent Supervisor", detail: "Orchestrates specialized sub-agents for intent classification, RAG retrieval, tool execution, and response synthesis." },
+        { step: "3. Safety & Permission Layer", detail: "Applies deterministic risk classification and confirmation gates before executing high-impact tool actions." },
+        { step: "4. Observability Engine", detail: "Records session replays, tracks per-request cost, runs evaluation tooling, and triggers failure recovery logic." }
       ]
     },
     metrics: [
-      "Sub-second static AST analysis & complexity scoring pipeline",
-      "5 Core Audit Vectors: Bugs, Security, Performance, Complexity, Code Quality",
-      "FastAPI serverless microservices deployed seamlessly on Vercel"
+      "Real-time voice interaction with adaptive multi-provider LLM routing",
+      "Deterministic safety gates with risk-classified tool execution controls",
+      "Full observability: session replay, cost tracking & failure recovery"
     ],
     challenges: [
-      "Analyzing deeply nested repository file structures efficiently within Vercel serverless function timeouts.",
-      "Filtering static check false positives while ensuring Gemini LLM outputs structured, line-specific remediation guidance."
+      "Maintaining sub-second voice response latency while routing across multiple LLM providers with variable health.",
+      "Enforcing deterministic safety guarantees over probabilistic LLM tool-calling outputs."
     ],
     solutions: [
-      "Implemented asynchronous GitHub REST API fetching with concurrent FastAPI serverless execution routines.",
-      "Designed rigid Pydantic validation schemas and combined deterministic AST rules with LLM context prompts."
+      "Built a provider health monitor with circuit-breaker logic and real-time latency scoring for adaptive routing.",
+      "Designed a strict risk-classification schema with confirmation gates decoupled from the LLM inference path."
     ],
     features: [
-      "Public GitHub repository & branch-specific scanner",
-      "Automated Security Audits (SQLi, XSS, hardcoded credentials)",
-      "Cyclomatic & function complexity analysis engine",
-      "Interactive Code Health Dashboard with Overall Repository Score",
-      "AI Refactor Assistant providing line-level code improvements and explanations"
+      "Real-time voice agent with adaptive LLM provider routing",
+      "Multi-agent supervision with specialized sub-agent roles",
+      "RAG workflows for dynamic knowledge retrieval",
+      "Deterministic safety controls and permission gates for tool execution",
+      "Session replay, cost tracking & AI evaluation tooling",
+      "Failure recovery logic for production stability"
     ],
-    technologies: ["React", "Vite", "FastAPI", "Python", "Google Gemini 2.5 Flash", "GitHub REST API", "Tailwind CSS", "Vercel", "JavaScript"],
-    githubUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform",
-    liveUrl: "https://ai-code-review-platform-tbdp.vercel.app",
+    technologies: ["Python", "FastAPI", "React.js", "LLMs", "RAG", "LangChain", "WebSockets", "Vector Search", "Docker"],
+    githubUrl: "https://github.com/srinathdoggala-tech/voxpilot",
+    liveUrl: "",
     featured: true
   },
   {
@@ -234,6 +235,48 @@ export const PROJECTS: Project[] = [
     technologies: ["Next.js", "Python", "FastAPI", "PostgreSQL", "Vector Search", "LLMs", "Tailwind CSS", "Redis", "Docker"],
     githubUrl: "https://github.com/srinathdoggala/TalentLens-AI",
     liveUrl: "https://talentlens.srinathdoggala.tech",
+    featured: true
+  },
+  {
+    id: "review-gpt",
+    title: "ReviewGPT: AI-Powered Code Review Platform",
+    tagline: "Automated GitHub repository scanner combining static AST code analysis & Gemini AI for deep bug, security, and complexity audits.",
+    category: "Full Stack AI",
+    year: "2026",
+    description: "Built an AI-powered GitHub repository analysis platform using React, Vite, FastAPI, Python, and Google Gemini 2.5 Flash to perform automated code reviews, security vulnerability audits, cyclomatic complexity metrics, and AI refactoring suggestions.",
+    longDescription: "ReviewGPT bridges static code analysis and Large Language Models to provide actionable repository health insights before code reaches production. Combining GitHub REST API ingestion, custom AST analyzers, and Gemini 2.5 Flash, it identifies bugs, hardcoded secrets, SQL injection patterns, XSS risks, cyclomatic complexity hotspots, and generates AI refactoring recommendations with automated code explanations.",
+    architecture: {
+      title: "Repository Scanner & LLM Analysis Pipeline",
+      steps: [
+        { step: "1. GitHub REST API Ingestion", detail: "Scans public GitHub repositories, retrieving multi-branch structures and source file AST representations." },
+        { step: "2. Static Code Analyzer", detail: "Runs AST static checks for cyclomatic complexity, security risks (SQLi, XSS, exposed keys), and boundary bugs." },
+        { step: "3. Gemini 2.5 Flash Engine", detail: "Prompts Google Gemini 2.5 Flash to generate contextual code explanations, quality metrics, and refactoring fixes." },
+        { step: "4. ReviewGPT Dashboard", detail: "Renders real-time repository health score, issue distribution, file complexity metrics, and AI assistant UI." }
+      ]
+    },
+    metrics: [
+      "Sub-second static AST analysis & complexity scoring pipeline",
+      "5 Core Audit Vectors: Bugs, Security, Performance, Complexity, Code Quality",
+      "FastAPI serverless microservices deployed seamlessly on Vercel"
+    ],
+    challenges: [
+      "Analyzing deeply nested repository file structures efficiently within Vercel serverless function timeouts.",
+      "Filtering static check false positives while ensuring Gemini LLM outputs structured, line-specific remediation guidance."
+    ],
+    solutions: [
+      "Implemented asynchronous GitHub REST API fetching with concurrent FastAPI serverless execution routines.",
+      "Designed rigid Pydantic validation schemas and combined deterministic AST rules with LLM context prompts."
+    ],
+    features: [
+      "Public GitHub repository & branch-specific scanner",
+      "Automated Security Audits (SQLi, XSS, hardcoded credentials)",
+      "Cyclomatic & function complexity analysis engine",
+      "Interactive Code Health Dashboard with Overall Repository Score",
+      "AI Refactor Assistant providing line-level code improvements and explanations"
+    ],
+    technologies: ["React", "Vite", "FastAPI", "Python", "Google Gemini 2.5 Flash", "GitHub REST API", "Tailwind CSS", "Vercel", "JavaScript"],
+    githubUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform",
+    liveUrl: "https://ai-code-review-platform-tbdp.vercel.app",
     featured: true
   },
   {
