@@ -2,7 +2,18 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, Calendar, MapPin, ChevronDown, CheckCircle, Zap, Shield, Layers, ExternalLink } from "lucide-react";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,
+  ChevronDown,
+  CheckCircle,
+  Zap,
+  Shield,
+  Layers,
+  ExternalLink,
+  Code2
+} from "lucide-react";
 import { EXPERIENCES } from "../lib/data";
 
 export const Experience: React.FC = () => {
@@ -15,19 +26,19 @@ export const Experience: React.FC = () => {
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
             <Briefcase className="w-3.5 h-3.5 text-amber-400" />
-            <span>WORK EXPERIENCE &amp; IMPACT</span>
+            <span>ENGINEERING EXPERIENCE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Production Engineering <span className="gradient-text-gold">Experience</span>
+            Production <span className="gradient-text-gold">Contributions</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Hands-on software engineering delivering high-performance backend microservices and AI application workflows.
+            Hands-on engineering delivering asynchronous microservices, LLM workflows, and database caching.
           </p>
         </div>
 
         {/* Timeline List */}
         <div className="max-w-4xl mx-auto relative pl-6 sm:pl-8 border-l border-amber-500/20 space-y-12">
-          {EXPERIENCES.map((exp, index) => {
+          {EXPERIENCES.map((exp) => {
             const isExpanded = expandedId === exp.id;
             return (
               <motion.div
@@ -44,7 +55,7 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Experience Card */}
-                <div className="glass-panel rounded-3xl border border-amber-500/20 bg-amber-950/10 overflow-hidden transition-all duration-300 hover:border-amber-400/50">
+                <div className="glass-panel rounded-3xl border border-amber-500/20 bg-amber-950/10 overflow-hidden transition-all duration-300 hover:border-amber-400/50 shadow-xl">
                   {/* Card Header Bar */}
                   <div
                     onClick={() => setExpandedId(isExpanded ? null : exp.id)}
@@ -55,11 +66,11 @@ export const Experience: React.FC = () => {
                         <span className="px-3 py-1 text-xs font-mono font-bold text-amber-300 bg-amber-950/40 rounded-full border border-amber-500/30">
                           {exp.type}
                         </span>
-                        <span className="text-xs text-gray-400 flex items-center gap-1">
+                        <span className="text-xs text-gray-400 flex items-center gap-1 font-mono">
                           <Calendar className="w-3.5 h-3.5 text-gray-500" />
                           {exp.period}
                         </span>
-                        <span className="text-xs text-gray-400 flex items-center gap-1">
+                        <span className="text-xs text-gray-400 flex items-center gap-1 font-mono">
                           <MapPin className="w-3.5 h-3.5 text-gray-500" />
                           {exp.location}
                         </span>
@@ -67,13 +78,13 @@ export const Experience: React.FC = () => {
 
                       <h3 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                         {exp.role}
-                        <span className="text-blue-400 text-lg font-normal">@ {exp.company}</span>
+                        <span className="text-amber-300 text-lg font-normal">@ {exp.company}</span>
                       </h3>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="hidden sm:inline text-xs text-blue-400 font-mono">
-                        {isExpanded ? "Collapse Details" : "Expand Details"}
+                      <span className="hidden sm:inline text-xs text-amber-400 font-mono">
+                        {isExpanded ? "Collapse Details" : "View Contributions"}
                       </span>
                       <div className={`p-2 rounded-full glass-panel border border-white/10 text-gray-300 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
                         <ChevronDown className="w-4 h-4" />
@@ -95,25 +106,28 @@ export const Experience: React.FC = () => {
                           {exp.description}
                         </p>
 
-                        {/* Impact Metrics Highlights */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {/* Defensible Metrics */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           {exp.metrics.map((metric) => (
-                            <div key={metric} className="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-300 flex items-center gap-2">
-                              <Zap className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                            <div
+                              key={metric}
+                              className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-300 flex items-center gap-2"
+                            >
+                              <Zap className="w-4 h-4 text-amber-400 flex-shrink-0" />
                               <span>{metric}</span>
                             </div>
                           ))}
                         </div>
 
-                        {/* Key Bullet Points */}
+                        {/* Crisp Defensible Bullets */}
                         <div className="space-y-3">
                           <h4 className="text-xs font-mono text-gray-400 uppercase tracking-wider">
-                            Key Responsibilities &amp; Engineering Contributions
+                            Core Engineering Responsibilities
                           </h4>
                           <ul className="space-y-2.5">
                             {exp.bulletPoints.map((bullet, idx) => (
-                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-300 leading-relaxed">
-                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
+                              <li key={idx} className="flex items-start gap-3 text-sm text-gray-300 leading-relaxed font-normal">
+                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <span>{bullet}</span>
                               </li>
                             ))}
@@ -122,10 +136,13 @@ export const Experience: React.FC = () => {
 
                         {/* Technologies Tags */}
                         <div className="pt-4 border-t border-white/10 space-y-2">
-                          <span className="text-xs font-mono text-gray-400">Technology Stack Utilized:</span>
+                          <span className="text-xs font-mono text-gray-400">Engineering Stack:</span>
                           <div className="flex flex-wrap gap-2">
                             {exp.technologies.map((tech) => (
-                              <span key={tech} className="px-2.5 py-1 text-xs font-mono text-gray-300 glass-panel rounded-md border border-white/10">
+                              <span
+                                key={tech}
+                                className="px-2.5 py-1 text-xs font-mono text-gray-300 glass-panel rounded-md border border-white/10"
+                              >
                                 {tech}
                               </span>
                             ))}

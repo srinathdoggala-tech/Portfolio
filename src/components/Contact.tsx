@@ -2,7 +2,19 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, FileText, Copy, Check, Sparkles, ShieldCheck } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  FileText,
+  Copy,
+  Check,
+  Sparkles,
+  ShieldCheck,
+  ArrowRight,
+  ExternalLink
+} from "lucide-react";
 import confetti from "canvas-confetti";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { PERSONAL_INFO } from "../lib/data";
@@ -11,12 +23,13 @@ export const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
-    subject: "",
+    roleOrCompany: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +37,13 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Build mailto link and open it — messages land directly in inbox
     const subject = encodeURIComponent(
-      formState.subject || `Portfolio Contact from ${formState.name}`
+      `Interview / Engineering Opportunity from ${formState.name}${
+        formState.roleOrCompany ? ` (${formState.roleOrCompany})` : ""
+      }`
     );
     const body = encodeURIComponent(
-      `Hi Srinath,\n\n${formState.message}\n\n---\nFrom: ${formState.name}\nEmail: ${formState.email}`
+      `Hi Srinath,\n\n${formState.message}\n\n---\nSender: ${formState.name}\nEmail: ${formState.email}\nCompany/Team: ${formState.roleOrCompany || "Not specified"}`
     );
     const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
     window.open(mailtoLink, "_blank");
@@ -42,7 +56,7 @@ export const Contact: React.FC = () => {
         spread: 70,
         origin: { y: 0.6 },
       });
-    }, 800);
+    }, 600);
   };
 
   const handleCopyEmail = () => {
@@ -51,205 +65,220 @@ export const Contact: React.FC = () => {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(PERSONAL_INFO.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
+  };
+
   return (
     <section id="contact" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
-            <Mail className="w-3.5 h-3.5 text-amber-400" />
-            <span>GET IN TOUCH &amp; RECRUITER CONTACT</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-emerald-500/30 text-xs font-mono font-medium text-emerald-300 bg-emerald-950/30">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span>ACTIVELY INTERVIEWING</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Let&apos;s Build <span className="gradient-text-gold">Together</span>
+            Looking for My Next <span className="gradient-text-gold">Engineering Opportunity</span>
           </h2>
-          <p className="text-gray-400 text-base sm:text-lg">
-            Open for AI Engineer, Full Stack Engineer, and Backend Engineering roles across top tech companies &amp; AI startups.
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+            I am currently interviewing for <strong className="text-white">AI Engineer</strong>, <strong className="text-white">Applied AI</strong>, <strong className="text-white">AI/ML Engineer</strong>, and <strong className="text-white">AI Full-Stack</strong> roles.
           </p>
         </div>
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Contact Info & Resume Card */}
-          <div className="lg:col-span-5 glass-panel p-8 rounded-3xl border border-amber-500/20 bg-amber-950/10 space-y-8 relative overflow-hidden">
-            {/* Availability Status */}
-            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 space-y-2">
+          {/* Left: Contact Channels & Credentials */}
+          <div className="lg:col-span-5 glass-panel p-6 sm:p-8 rounded-3xl border border-amber-500/20 bg-gradient-to-b from-[#091124] to-[#040816] space-y-6 shadow-2xl">
+            {/* Status Callout */}
+            <div className="p-4 rounded-2xl bg-amber-950/30 border border-amber-500/30 space-y-1.5">
               <div className="flex items-center gap-2 text-amber-300 font-mono text-xs font-bold">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                <span>{PERSONAL_INFO.availabilityStatus}</span>
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Available for Technical Interviews</span>
               </div>
-              <p className="text-xs text-gray-300">
-                Ready for immediate technical interviews and engineering contributions.
+              <p className="text-xs text-gray-300 leading-relaxed">
+                Founding AI Full Stack Engineer Intern @ Sreeva AI. Ready for immediate technical discussions, code walk-throughs, and system design interviews.
               </p>
             </div>
 
-            {/* Direct Details */}
-            <div className="space-y-4 font-mono text-xs">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-amber-500/20">
+            {/* Direct Contact Points */}
+            <div className="space-y-3 font-mono text-xs">
+              {/* Email */}
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition-colors">
                 <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-amber-400" />
-                  <span className="text-gray-200">{PERSONAL_INFO.email}</span>
+                  <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+                  <a
+                    href={`mailto:${PERSONAL_INFO.email}`}
+                    className="text-gray-200 hover:text-amber-300 transition-colors"
+                  >
+                    {PERSONAL_INFO.email}
+                  </a>
                 </div>
                 <button
                   onClick={handleCopyEmail}
                   className="p-1.5 text-gray-400 hover:text-white rounded-md bg-white/5 hover:bg-white/10 transition-colors"
-                  title="Copy email to clipboard"
+                  title="Copy email address"
                 >
-                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-amber-500/20">
-                <Phone className="w-4 h-4 text-amber-400" />
-                <span className="text-gray-200">{PERSONAL_INFO.phone}</span>
+              {/* Phone */}
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                  <a
+                    href={`tel:${PERSONAL_INFO.phone}`}
+                    className="text-gray-200 hover:text-amber-300 transition-colors"
+                  >
+                    {PERSONAL_INFO.phone}
+                  </a>
+                </div>
+                <button
+                  onClick={handleCopyPhone}
+                  className="p-1.5 text-gray-400 hover:text-white rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+                  title="Copy phone number"
+                >
+                  {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-amber-500/20">
-                <MapPin className="w-4 h-4 text-amber-400" />
-                <span className="text-gray-200">{PERSONAL_INFO.location}</span>
+              {/* Location */}
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                <span className="text-gray-300">
+                  {PERSONAL_INFO.location} · Open to Remote &amp; Relocation
+                </span>
               </div>
             </div>
 
-            {/* Resume Download Box */}
+            {/* Resume Download CTA */}
             <div className="p-5 rounded-2xl glass-panel border border-amber-500/30 bg-amber-950/20 space-y-3">
-              <div className="flex items-center gap-2 text-white font-bold text-sm">
-                <FileText className="w-4 h-4 text-amber-400" />
-                <span>Resume &amp; Technical Portfolio</span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-white font-bold text-sm">
+                  <FileText className="w-4 h-4 text-amber-400" />
+                  <span>Resume &amp; Technical Documentation</span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400 font-bold">PDF</span>
               </div>
-              <p className="text-xs text-gray-300">
-                Download my verified resume containing all project architectures and metrics.
+              <p className="text-xs text-gray-300 leading-snug">
+                One-page verified summary covering system architectures, automated testing benchmarks, and professional experience.
               </p>
               <a
-                href="/resume.pdf"
+                href={PERSONAL_INFO.resumeUrl}
                 download="Srinath_Doggala_Resume.pdf"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-gray-950 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 rounded-xl shadow-lg shadow-amber-500/25 transition-all"
+                className="w-full inline-flex items-center justify-center px-4 py-2.5 text-xs font-bold text-gray-950 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all shadow-md"
               >
-                <FileText className="w-3.5 h-3.5" />
                 <span>Download Resume (PDF)</span>
+                <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
               </a>
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center justify-center gap-4 pt-2">
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-gray-400 hover:text-white glass-panel rounded-xl border border-white/15 hover:border-blue-500/40 transition-colors"
-              >
-                <GithubIcon className="w-5 h-5" />
-              </a>
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-gray-400 hover:text-white glass-panel rounded-xl border border-white/15 hover:border-blue-500/40 transition-colors"
-              >
-                <LinkedinIcon className="w-5 h-5" />
-              </a>
-              <a
-                href={`mailto:${PERSONAL_INFO.email}`}
-                className="p-3 text-gray-400 hover:text-white glass-panel rounded-xl border border-white/15 hover:border-blue-500/40 transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
+            {/* Social Channels */}
+            <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+              <span className="text-xs font-mono text-gray-400">Verified Profiles:</span>
+              <div className="flex items-center gap-2">
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl glass-panel border border-white/10 hover:border-amber-400 text-gray-300 hover:text-white transition-colors"
+                  title="LinkedIn Profile"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl glass-panel border border-white/10 hover:border-amber-400 text-gray-300 hover:text-white transition-colors"
+                  title="GitHub Profile"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Right Interactive Form */}
-          <div className="lg:col-span-7 glass-panel p-8 rounded-3xl border border-amber-500/20 bg-amber-950/10 space-y-6">
-            <h3 className="text-2xl font-bold text-white tracking-tight">Send a Direct Message</h3>
+          {/* Right: Fast Message Form */}
+          <div className="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 bg-[#060c1d]/90 space-y-6 shadow-2xl">
+            <div className="space-y-1 pb-4 border-b border-white/[0.08]">
+              <h3 className="text-xl font-bold text-white tracking-tight">Direct Message or Interview Inquiry</h3>
+              <p className="text-xs text-gray-400 font-mono">
+                Submitting directly opens an email draft addressed to doggalasrinath@gmail.com
+              </p>
+            </div>
 
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-8 text-center space-y-4 rounded-2xl bg-amber-950/30 border border-amber-500/30"
-              >
-                <div className="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto">
-                  <Check className="w-6 h-6" />
-                </div>
-                <h4 className="text-xl font-bold text-white">Message Transmitted!</h4>
-                <p className="text-sm text-gray-300">
-                  Thank you for reaching out, {formState.name}. I will respond to your email ({formState.email}) promptly.
-                </p>
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setFormState({ name: "", email: "", subject: "", message: "" });
-                  }}
-                  className="px-4 py-2 text-xs font-mono text-amber-300 hover:text-amber-200"
-                >
-                  Send another message
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-gray-400">Your Name *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Hiring Manager / Recruiter"
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full px-4 py-3 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-gray-400">Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="e.g. recruiter@company.com"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full px-4 py-3 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60"
-                    />
-                  </div>
-                </div>
-
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-gray-400">Subject</label>
+                  <label className="text-xs font-mono text-gray-300">Your Name *</label>
                   <input
                     type="text"
-                    placeholder="e.g. AI Engineer Role Opportunity @ OpenAI"
-                    value={formState.subject}
-                    onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                    className="w-full px-4 py-3 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60"
+                    required
+                    placeholder="e.g. Alex Chen"
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    className="w-full px-4 py-2.5 text-xs bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-400 font-mono"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-gray-400">Message *</label>
-                  <textarea
+                  <label className="text-xs font-mono text-gray-300">Your Email *</label>
+                  <input
+                    type="email"
                     required
-                    rows={4}
-                    placeholder="Write your message or inquiry..."
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full px-4 py-3 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60 resize-none"
+                    placeholder="e.g. alex@company.com"
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    className="w-full px-4 py-2.5 text-xs bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-400 font-mono"
                   />
                 </div>
+              </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-gray-950 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 rounded-xl shadow-lg shadow-amber-500/20 transition-all disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <span>Transmitting Message...</span>
-                  ) : (
-                    <>
-                      <span>Transmit Message</span>
-                      <Send className="w-3.5 h-3.5 ml-2" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+              <div className="space-y-1.5">
+                <label className="text-xs font-mono text-gray-300">Company / Organization / Role (Optional)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. AI Startup / Hiring Manager"
+                  value={formState.roleOrCompany}
+                  onChange={(e) => setFormState({ ...formState, roleOrCompany: e.target.value })}
+                  className="w-full px-4 py-2.5 text-xs bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-400 font-mono"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-mono text-gray-300">Message / Inquiry *</label>
+                <textarea
+                  required
+                  rows={5}
+                  placeholder="Hi Srinath, we came across your work on VoxPilot and ResearchGPT and would like to invite you for an interview..."
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  className="w-full px-4 py-2.5 text-xs bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-400 font-mono resize-none leading-relaxed"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-gray-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 rounded-xl shadow-lg transition-all"
+              >
+                {isSubmitting ? (
+                  <span>Opening Email Client...</span>
+                ) : submitted ? (
+                  <span className="flex items-center gap-1.5 text-emerald-950">
+                    <Check className="w-4 h-4" /> Message Prepared!
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Send className="w-4 h-4" /> Send Direct Inquiry
+                  </span>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       </div>

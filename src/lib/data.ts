@@ -6,6 +6,10 @@ export interface Project {
   year: string;
   description: string;
   longDescription: string;
+  problem?: string;
+  whatIBuilt?: string;
+  evidence?: string[];
+  statusNote?: string;
   architecture: {
     title: string;
     steps: { step: string; detail: string }[];
@@ -58,11 +62,26 @@ export interface EducationItem {
   details: string[];
 }
 
+export interface ProofItem {
+  id: string;
+  category: string;
+  icon: string;
+  headline: string;
+  metric: string;
+  detail: string;
+  verificationMethod: string;
+  linkText?: string;
+  linkUrl?: string;
+}
+
 export const PERSONAL_INFO = {
   name: "Srinath Doggala",
-  roleTitle: "AI Engineer | Full Stack Architect | Agentic Systems Builder",
-  headline: "Building autonomous multi-agent AI systems, high-performance FastAPI backends, and production-grade full stack applications.",
-  bio: "Engineering student & Founding AI Full Stack Engineer Intern with hands-on expertise building production-ready LLM pipelines, autonomous swarms, asynchronous REST APIs, and modern React/Next.js interfaces. Passionate about solving complex system challenges at scale.",
+  roleTitle: "AI Engineer | Systems & Agentic Workflows",
+  headline: "AI Engineer building reliable AI systems, not just LLM demos.",
+  subheadline: "I build production-oriented AI systems across LLM applications, agentic workflows, RAG, voice AI, and backend infrastructure using Python, FastAPI, React/Next.js, and PostgreSQL.",
+  bio: "Founding AI Full Stack Engineer Intern @ Sreeva AI. Focused on building production-oriented AI systems across LLMs, multi-agent swarms, selective RAG, real-time voice streaming, and asynchronous FastAPI/PostgreSQL backends. B.E. CSE (AI/ML) at Chandigarh University (2023–2027).",
+  currentRole: "Founding AI Full Stack Engineer Intern @ Sreeva AI",
+  degreeInfo: "B.E. CSE (AI/ML), Chandigarh University · 2027",
   location: "Hyderabad, India",
   phone: "+91-7569656550",
   email: "doggalasrinath@gmail.com",
@@ -70,18 +89,42 @@ export const PERSONAL_INFO = {
   linkedin: "https://www.linkedin.com/in/srinath-doggala-081083286",
   portfolio: "https://srinathdoggala.tech",
   resumeUrl: "/resume.pdf",
-  availabilityStatus: "Available for AI & Full Stack Roles",
-  targetCompanies: [
-    "OpenAI", "Anthropic", "Google DeepMind", "Microsoft AI", "Meta", "Apple",
-    "Amazon", "NVIDIA", "Databricks", "Cloudflare", "Stripe", "Vercel", "Scale AI", "Cursor", "Perplexity"
-  ]
+  availabilityStatus: "Actively Interviewing for AI & Full Stack Roles",
+  targetRoles: [
+    "AI Engineer",
+    "Applied AI Engineer",
+    "AI/ML Engineer",
+    "AI Full-Stack Engineer",
+    "Backend Engineer"
+  ],
+  targetStatement: "Building production-oriented AI systems involving LLMs, agents, RAG, voice AI, backend infrastructure, and full-stack product engineering."
 };
 
 export const QUICK_STATS = [
-  { label: "API Latency Speedup", value: "35%", subtext: "via Redis & Async Pipelines" },
-  { label: "Resumes Tested", value: "500+", subtext: "Continuous Load & ATS Scoring" },
-  { label: "Autonomous AI Swarm", value: "4 Agents", subtext: "Planner, Researcher, Verifier, Writer" },
-  { label: "Intermediate Score", value: "97.5%", subtext: "Academic Distinction Marks" },
+  {
+    label: "Med. API Latency Reduction",
+    value: "35%",
+    subtext: "Redis Caching + AsyncIO Pipelines",
+    evidence: "Measured on production endpoint request workloads at Sreeva AI"
+  },
+  {
+    label: "VoxPilot Automated Tests",
+    value: "27",
+    subtext: "Automated Unit & Integration Tests",
+    evidence: "Routing policies, voice streaming, RAG, circuit breakers & safety"
+  },
+  {
+    label: "Autonomous Research Swarm",
+    value: "4 Agents",
+    subtext: "Planner, Researcher, Verifier, Writer",
+    evidence: "Real-time web retrieval with automated claim verification"
+  },
+  {
+    label: "Resumes Evaluated",
+    value: "500+",
+    subtext: "Continuous Load & ATS Scoring",
+    evidence: "Benchmarked parsing stability and vector embedding match consistency"
+  }
 ];
 
 export const EXPERIENCES: ExperienceItem[] = [
@@ -92,21 +135,20 @@ export const EXPERIENCES: ExperienceItem[] = [
     location: "Remote",
     type: "Internship",
     period: "May 2026 – Present",
-    description: "Building production-ready full-stack applications using React, FastAPI, PostgreSQL, and AI-powered services for user-facing features and internal workflows.",
+    description: "Engineering production-oriented AI features and backend microservices using Python, FastAPI, React/Next.js, PostgreSQL, and LLM APIs.",
     bulletPoints: [
-      "Building production-ready full-stack applications using React, FastAPI, PostgreSQL, and AI-powered services for user-facing features and internal workflows.",
-      "Developing asynchronous FastAPI services, PostgreSQL-backed REST APIs, Redis caching, backend data pipelines, and third-party API integrations.",
-      "Implemented API integrations, asynchronous processing, and Redis caching, reducing average API response time by approximately 35%.",
-      "Collaborated with cross-functional teams to design, test, deploy, and maintain production-ready AI applications.",
-      "Assisted in testing, documenting, and deploying AI services using Docker and GitHub Actions while maintaining technical documentation for reliable software releases."
+      "Built AI-powered full-stack features using Python, FastAPI, React/Next.js, PostgreSQL, and LLM APIs.",
+      "Designed asynchronous backend workflows, validated REST APIs, and Redis-backed application infrastructure.",
+      "Developed RAG and multi-step LLM workflows using LangChain/LangGraph with deterministic validation and failure handling.",
+      "Reduced API response latency by ~35% through asynchronous processing and Redis caching."
     ],
     metrics: [
-      "35% reduction in API response times",
-      "Asynchronous pipeline architecture",
-      "100% CI/CD workflow coverage with Docker & GitHub Actions"
+      "35% lower API response times via Redis caching & async pipelines",
+      "Robust REST & WebSocket microservices architecture",
+      "Automated CI/CD workflows with Docker & GitHub Actions"
     ],
     technologies: [
-      "Python", "FastAPI", "ReactJS", "PostgreSQL", "Redis", "Docker", "GitHub Actions", "REST APIs", "LLM APIs"
+      "Python", "FastAPI", "React/Next.js", "PostgreSQL", "Redis", "Docker", "GitHub Actions", "REST APIs", "LLM APIs"
     ]
   }
 ];
@@ -115,27 +157,36 @@ export const PROJECTS: Project[] = [
   {
     id: "voxpilot-ai",
     title: "VoxPilot AI: Real-Time Voice Agent Platform",
-    tagline: "Real-time voice AI platform with adaptive model routing, multi-agent supervision, and RAG-powered knowledge workflows.",
+    tagline: "Real-time voice AI infrastructure with WebSocket audio transport, adaptive model routing, selective RAG, and circuit breakers.",
     category: "AI / Multi-Agent",
     year: "2026",
-    description: "Engineered a real-time voice AI platform with adaptive model routing, provider health monitoring, multi-agent supervision, and RAG workflows using Python, FastAPI, React.js, and LLMs.",
-    longDescription: "VoxPilot AI is a production-grade voice agent platform that orchestrates real-time speech interactions through adaptive LLM routing and multi-agent supervision. It combines deterministic safety controls, RAG-based knowledge retrieval, and comprehensive observability tooling — session replay, cost tracking, and failure recovery — to deliver stable, measurable AI behavior at scale.",
+    description: "Engineered a real-time voice AI platform featuring WebSocket audio streaming, provider health monitoring, multi-agent supervision, and RAG knowledge retrieval.",
+    longDescription: "VoxPilot AI addresses the inherent unpredictability of voice agents by combining low-latency WebSocket audio transport with resilient provider abstractions, automated circuit breakers, deterministic risk classification for tool calls, and complete observability telemetry.",
+    problem: "Real-time voice agents fail unpredictably in production due to upstream provider outages, latency jitter, unverified tool executions, and brittle session state.",
+    whatIBuilt: "A full-stack voice AI platform with WebSocket audio transport, STT/LLM/TTS provider abstractions, adaptive multi-agent routing, selective RAG, deterministic tool safety confirmation gates, provider failovers, circuit breakers, session replay, and token/cost telemetry.",
+    evidence: [
+      "27 automated tests passing (routing, voice pipeline, RAG, circuit breakers, safety)",
+      "Provider failure recovery with sub-second circuit breaker failovers",
+      "Deterministic risk-classified tool execution schema",
+      "Session replay and latency/cost telemetry dashboard"
+    ],
+    statusNote: "Frontend live on Vercel. 27/27 automated tests passing in CI. Backend requires cloud API credentials or local Docker runner.",
     architecture: {
-      title: "Real-Time Voice Agent Orchestration Pipeline",
+      title: "Real-Time Voice Pipeline & Fault-Tolerant Routing",
       steps: [
-        { step: "1. Adaptive Model Router", detail: "Dynamically routes voice queries to optimal LLM providers based on real-time health monitoring, latency, and cost signals." },
-        { step: "2. Multi-Agent Supervisor", detail: "Orchestrates specialized sub-agents for intent classification, RAG retrieval, tool execution, and response synthesis." },
-        { step: "3. Safety & Permission Layer", detail: "Applies deterministic risk classification and confirmation gates before executing high-impact tool actions." },
-        { step: "4. Observability Engine", detail: "Records session replays, tracks per-request cost, runs evaluation tooling, and triggers failure recovery logic." }
+        { step: "1. WebSocket Audio Transport", detail: "Low-latency bidirectional streaming connecting browser audio to backend voice orchestrator." },
+        { step: "2. Adaptive Model Router & Circuit Breaker", detail: "Monitors upstream provider health and latency; automatically triggers fallback failovers upon errors." },
+        { step: "3. Supervisor Agent & Tool Safety Gates", detail: "Orchestrates intent classification with strict risk classification and approval gates before executing tools." },
+        { step: "4. Selective RAG & Observability Engine", detail: "Contextual vector retrieval, per-request latency & cost telemetry, plus session replay for evaluation." }
       ]
     },
     metrics: [
-      "Real-time voice interaction with adaptive multi-provider LLM routing",
-      "Deterministic safety gates with risk-classified tool execution controls",
-      "Full observability: session replay, cost tracking & failure recovery"
+      "27 automated tests passing in CI",
+      "Sub-second circuit breaker failover",
+      "Deterministic risk classification for tools"
     ],
     challenges: [
-      "Maintaining sub-second voice response latency while routing across multiple LLM providers with variable health.",
+      "Maintaining sub-second voice response latency while routing across third-party LLM providers with variable latency.",
       "Enforcing deterministic safety guarantees over probabilistic LLM tool-calling outputs."
     ],
     solutions: [
@@ -143,14 +194,14 @@ export const PROJECTS: Project[] = [
       "Designed a strict risk-classification schema with confirmation gates decoupled from the LLM inference path."
     ],
     features: [
-      "Real-time voice agent with adaptive LLM provider routing",
+      "Low-latency WebSocket bidirectional voice streaming",
+      "Adaptive LLM provider routing with automatic circuit breakers",
       "Multi-agent supervision with specialized sub-agent roles",
-      "RAG workflows for dynamic knowledge retrieval",
+      "Selective RAG workflows for dynamic knowledge retrieval",
       "Deterministic safety controls and permission gates for tool execution",
-      "Session replay, cost tracking & AI evaluation tooling",
-      "Failure recovery logic for production stability"
+      "Session replay, cost tracking & telemetry dashboard"
     ],
-    technologies: ["Python", "FastAPI", "React.js", "LLMs", "RAG", "LangChain", "WebSockets", "Vector Search", "Docker"],
+    technologies: ["Python", "FastAPI", "React.js", "WebSockets", "LLMs", "RAG", "LangChain", "Vector Search", "Docker"],
     githubUrl: "https://github.com/srinathdoggala-tech/voxpilot",
     liveUrl: "https://voxpilot-two.vercel.app/",
     featured: true
@@ -158,28 +209,35 @@ export const PROJECTS: Project[] = [
   {
     id: "research-gpt",
     title: "ResearchGPT: Multi-Agent AI Research Assistant",
-    tagline: "Autonomous 4-agent research swarm executing real-time web retrieval, fact verification, and report synthesis.",
+    tagline: "Autonomous 4-agent research pipeline executing concurrent web retrieval, claim verification, and cited synthesis.",
     category: "AI / Multi-Agent",
     year: "2025",
-    description: "Designed a production-ready multi-agent AI research platform using Python, FastAPI, ReactJS, PostgreSQL, and LangChain with Planner, Researcher, Verifier, and Writer agents.",
-    longDescription: "ResearchGPT solves the challenge of AI hallucinations and incomplete web research by deploying an orchestrated swarm of 4 autonomous LLM agents. Each agent specializes in a distinct sub-task of the research process, connected via asynchronous FastAPI pipelines and PostgreSQL state tracking.",
+    description: "Designed a multi-agent AI research platform using Python, FastAPI, ReactJS, PostgreSQL, and LangChain with Planner, Researcher, Verifier, and Writer agents.",
+    longDescription: "ResearchGPT eliminates hallucinations and manual web scraping by deploying an orchestrated swarm of 4 autonomous LLM agents. Each agent specializes in a distinct sub-task of the research journey, backed by asynchronous FastAPI pipelines and PostgreSQL state tracking.",
+    problem: "Single-prompt LLMs hallucinate citations and rely on stale training weights, producing unverified reports unfit for serious analysis.",
+    whatIBuilt: "An orchestrated multi-agent research pipeline where Planner breaks queries into targeted hypotheses, Researcher gathers web documents concurrently via Tavily, Verifier cross-references claims against raw sources, and Writer synthesizes cited Markdown/PDF briefs.",
+    evidence: [
+      "4 synchronized agents with isolated JSON schema validation",
+      "15+ REST micro-endpoints supporting asynchronous document processing",
+      "PostgreSQL audit trail storing reasoning steps and verified citations"
+    ],
     architecture: {
       title: "Orchestrated Multi-Agent Workflow Engine",
       steps: [
-        { step: "1. Planner Agent", detail: "Deconstructs high-level queries into structured research goals & search queries." },
-        { step: "2. Researcher Agent", detail: "Executes concurrent search via Tavily API and extracts web page content." },
-        { step: "3. Verifier Agent", detail: "Cross-references claims against primary web sources to strip out hallucinations." },
-        { step: "4. Writer Agent", detail: "Synthesizes multi-source data into formatted Markdown/LaTeX reports with inline citations." }
+        { step: "1. Planner Agent", detail: "Deconstructs complex user queries into structured research sub-questions and search parameters." },
+        { step: "2. Researcher Agent", detail: "Executes concurrent web queries via Tavily API and extracts full text content." },
+        { step: "3. Verifier Agent", detail: "Cross-checks extracted claims against primary sources to systematically eliminate hallucinations." },
+        { step: "4. Writer Agent", detail: "Synthesizes multi-source data into formatted Markdown/PDF reports with verified inline citations." }
       ]
     },
     metrics: [
       "4 Autonomous AI Agents orchestrated concurrently",
-      "15+ REST API micro-endpoints supporting asynchronous document processing",
-      "Zero-downtime deployment via Docker & GitHub Actions"
+      "15+ REST endpoints with async processing",
+      "Automated claim verification against source URLs"
     ],
     challenges: [
       "Preventing cascading agent hallucination across multi-step research pipelines.",
-      "Managing asynchronous web search latencies without blocking API event loops."
+      "Managing asynchronous web search latencies without blocking the API event loop."
     ],
     solutions: [
       "Engineered strict JSON schema outputs and secondary Verifier agent cross-checking.",
@@ -197,13 +255,69 @@ export const PROJECTS: Project[] = [
     featured: true
   },
   {
+    id: "review-gpt",
+    title: "ReviewGPT: AI-Powered Code Review Platform",
+    tagline: "GitHub repository scanner combining AST static analysis, security audits, and Gemini 2.5 Flash refactoring.",
+    category: "Backend Systems",
+    year: "2026",
+    description: "Built an AI-powered GitHub repository analysis platform using React, Vite, FastAPI, Python, and Google Gemini 2.5 Flash to perform automated code reviews, security vulnerability audits, and complexity scoring.",
+    longDescription: "ReviewGPT bridges static code analysis and Large Language Models to provide actionable repository health insights before code reaches production. Combining GitHub REST API ingestion, custom AST analyzers, and Gemini 2.5 Flash, it identifies bugs, hardcoded secrets, SQL injection patterns, XSS risks, and cyclomatic complexity hotspots.",
+    problem: "Developers push avoidable security flaws (hardcoded secrets, SQLi, XSS) and high-complexity functions that standard linters miss and code reviews overlook.",
+    whatIBuilt: "An automated repository analysis platform combining Python AST parsing for deterministic cyclomatic complexity and vulnerability patterns with Google Gemini 2.5 Flash for contextual line-level explanations and automated refactoring diffs.",
+    evidence: [
+      "Deterministic AST checks for SQLi, XSS, and hardcoded credential leaks",
+      "Cyclomatic complexity metrics computed per function and file",
+      "FastAPI serverless microservices deployed on Vercel with asynchronous GitHub ingestion"
+    ],
+    architecture: {
+      title: "AST Static Analysis & Gemini Refactoring Pipeline",
+      steps: [
+        { step: "1. GitHub REST API Ingestion", detail: "Scans public GitHub repositories, retrieving multi-branch structures and source file AST representations." },
+        { step: "2. Static Code Analyzer", detail: "Runs AST static checks for cyclomatic complexity, security risks (SQLi, XSS, exposed keys), and boundary bugs." },
+        { step: "3. Gemini 2.5 Flash Engine", detail: "Prompts Google Gemini 2.5 Flash to generate contextual code explanations, quality metrics, and refactoring fixes." },
+        { step: "4. ReviewGPT Dashboard", detail: "Renders real-time repository health score, issue distribution, file complexity metrics, and AI assistant UI." }
+      ]
+    },
+    metrics: [
+      "Sub-second static AST analysis & complexity scoring pipeline",
+      "5 Core Audit Vectors: Bugs, Security, Performance, Complexity, Quality",
+      "FastAPI serverless microservices deployed on Vercel"
+    ],
+    challenges: [
+      "Analyzing deeply nested repository file structures efficiently within Vercel serverless function timeouts.",
+      "Filtering static check false positives while ensuring Gemini LLM outputs structured, line-specific remediation guidance."
+    ],
+    solutions: [
+      "Implemented asynchronous GitHub REST API fetching with concurrent FastAPI serverless execution routines.",
+      "Designed rigid Pydantic validation schemas and combined deterministic AST rules with LLM context prompts."
+    ],
+    features: [
+      "Public GitHub repository & branch-specific scanner",
+      "Automated Security Audits (SQLi, XSS, hardcoded credentials)",
+      "Cyclomatic & function complexity analysis engine",
+      "Interactive Code Health Dashboard with Overall Repository Score",
+      "AI Refactor Assistant providing line-level code improvements and explanations"
+    ],
+    technologies: ["React", "Vite", "FastAPI", "Python", "Google Gemini 2.5 Flash", "GitHub REST API", "Tailwind CSS", "Vercel"],
+    githubUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform",
+    liveUrl: "https://ai-code-review-platform-tbdp.vercel.app",
+    featured: true
+  },
+  {
     id: "talentlens-ai",
     title: "TalentLens AI: AI Recruiter & Career Intelligence Platform",
     tagline: "Enterprise resume intelligence & ATS engine performing deep semantic document evaluation and recruiter simulations.",
     category: "Full Stack AI",
     year: "2025",
     description: "Built a full-stack AI career platform using Next.js, FastAPI, PostgreSQL, and LLMs to parse PDF/DOCX documents, perform ATS match scoring, document analysis, recruiter simulation, and AI-powered career recommendations.",
-    longDescription: "TalentLens AI transforms the hiring workflow by giving job seekers and recruiters instant, objective analysis of resumes against complex job descriptions. Powered by vector search and LLMs, it parses raw PDF/DOCX layouts into structured JSON telemetry.",
+    longDescription: "TalentLens AI gives job seekers and recruiters instant, objective analysis of resumes against complex job descriptions. Powered by vector search and LLMs, it parses raw PDF/DOCX layouts into structured JSON telemetry.",
+    problem: "Job seekers lack objective feedback on resume formatting and keyword compatibility against modern semantic ATS engines.",
+    whatIBuilt: "An end-to-end recruitment intelligence system with asynchronous PDF/DOCX layout parsing, vector embedding matching, LLM qualitative scoring, and interactive interview question generation.",
+    evidence: [
+      "500+ resumes benchmarked in continuous stress and parsing tests",
+      "Strict Pydantic/Zod schemas ensuring quantitative score stability",
+      "Sub-3s document parsing and vector matching pipeline"
+    ],
     architecture: {
       title: "Document Parsing & Vector Match Telemetry",
       steps: [
@@ -238,55 +352,20 @@ export const PROJECTS: Project[] = [
     featured: true
   },
   {
-    id: "review-gpt",
-    title: "ReviewGPT: AI-Powered Code Review Platform",
-    tagline: "Automated GitHub repository scanner combining static AST code analysis & Gemini AI for deep bug, security, and complexity audits.",
-    category: "Full Stack AI",
-    year: "2026",
-    description: "Built an AI-powered GitHub repository analysis platform using React, Vite, FastAPI, Python, and Google Gemini 2.5 Flash to perform automated code reviews, security vulnerability audits, cyclomatic complexity metrics, and AI refactoring suggestions.",
-    longDescription: "ReviewGPT bridges static code analysis and Large Language Models to provide actionable repository health insights before code reaches production. Combining GitHub REST API ingestion, custom AST analyzers, and Gemini 2.5 Flash, it identifies bugs, hardcoded secrets, SQL injection patterns, XSS risks, cyclomatic complexity hotspots, and generates AI refactoring recommendations with automated code explanations.",
-    architecture: {
-      title: "Repository Scanner & LLM Analysis Pipeline",
-      steps: [
-        { step: "1. GitHub REST API Ingestion", detail: "Scans public GitHub repositories, retrieving multi-branch structures and source file AST representations." },
-        { step: "2. Static Code Analyzer", detail: "Runs AST static checks for cyclomatic complexity, security risks (SQLi, XSS, exposed keys), and boundary bugs." },
-        { step: "3. Gemini 2.5 Flash Engine", detail: "Prompts Google Gemini 2.5 Flash to generate contextual code explanations, quality metrics, and refactoring fixes." },
-        { step: "4. ReviewGPT Dashboard", detail: "Renders real-time repository health score, issue distribution, file complexity metrics, and AI assistant UI." }
-      ]
-    },
-    metrics: [
-      "Sub-second static AST analysis & complexity scoring pipeline",
-      "5 Core Audit Vectors: Bugs, Security, Performance, Complexity, Code Quality",
-      "FastAPI serverless microservices deployed seamlessly on Vercel"
-    ],
-    challenges: [
-      "Analyzing deeply nested repository file structures efficiently within Vercel serverless function timeouts.",
-      "Filtering static check false positives while ensuring Gemini LLM outputs structured, line-specific remediation guidance."
-    ],
-    solutions: [
-      "Implemented asynchronous GitHub REST API fetching with concurrent FastAPI serverless execution routines.",
-      "Designed rigid Pydantic validation schemas and combined deterministic AST rules with LLM context prompts."
-    ],
-    features: [
-      "Public GitHub repository & branch-specific scanner",
-      "Automated Security Audits (SQLi, XSS, hardcoded credentials)",
-      "Cyclomatic & function complexity analysis engine",
-      "Interactive Code Health Dashboard with Overall Repository Score",
-      "AI Refactor Assistant providing line-level code improvements and explanations"
-    ],
-    technologies: ["React", "Vite", "FastAPI", "Python", "Google Gemini 2.5 Flash", "GitHub REST API", "Tailwind CSS", "Vercel", "JavaScript"],
-    githubUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform",
-    liveUrl: "https://ai-code-review-platform-tbdp.vercel.app",
-    featured: true
-  },
-  {
     id: "fruit-veg-recognition",
-    title: "AI-Based Fruit & Vegetable Recognition System",
+    title: "AI-Based Produce Recognition System",
     tagline: "Edge-optimized computer vision system providing sub-200ms item classification and instant nutritional telemetry.",
     category: "Computer Vision",
     year: "2025",
     description: "Developed an AI-powered computer vision system using MobileNetV2 and Transfer Learning for fruit and vegetable classification integrated with real-time nutritional analysis.",
     longDescription: "Combines deep learning computer vision with web backend microservices. Users upload or capture image frames of produce items, receiving instant visual classification across 30 categories alongside deep nutritional metrics (calories, carbs, protein, fats, vitamins).",
+    problem: "Edge produce identification requires lightweight model footprints while maintaining high accuracy across varied real-world lighting.",
+    whatIBuilt: "A MobileNetV2 transfer-learning classification pipeline integrated with Django REST APIs and CalorieNinjas macronutrient lookups.",
+    evidence: [
+      "Sub-200ms model inference runtime on web endpoints",
+      "30 produce categories classified with high accuracy",
+      "Live integration with nutritional database APIs"
+    ],
     architecture: {
       title: "Inference Engine to Nutritional Data Pipeline",
       steps: [
@@ -327,70 +406,136 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     title: "AI & Autonomous Systems",
     iconName: "Cpu",
     skills: [
-      { name: "Multi-Agent Workflows", level: "Advanced", tag: "LangChain / Swarms" },
-      { name: "LLM Orchestration", level: "Advanced", tag: "OpenAI / Claude / Gemini APIs" },
-      { name: "RAG & Vector Search", level: "Advanced", tag: "Retrieval Pipelines" },
-      { name: "Prompt Engineering", level: "Expert", tag: "Few-Shot / Structured Output" },
-      { name: "TensorFlow & PyTorch", level: "Intermediate", tag: "MobileNetV2 / Vision" },
-      { name: "LangChain & LlamaIndex", level: "Advanced", tag: "Agent Frameworks" }
+      { name: "Multi-Agent Workflows", level: "Swarm Supervision", tag: "LangChain · LangGraph · Agentic Workflows" },
+      { name: "LLM Orchestration", level: "API Routing", tag: "OpenAI · Claude · Gemini APIs · Fallbacks" },
+      { name: "RAG & Vector Search", level: "Retrieval", tag: "Chunking · Vector Embeddings · Similarity Search" },
+      { name: "Structured Outputs", level: "Deterministic AI", tag: "Pydantic Schemas · Tool Calling · Safety Gates" },
+      { name: "Computer Vision", level: "Edge Models", tag: "MobileNetV2 · TensorFlow · Transfer Learning" },
+      { name: "Observability & Eval", level: "Telemetry", tag: "Session Replay · Cost Tracking · Latency Monitoring" }
     ]
   },
   {
     title: "Backend & Microservices",
     iconName: "Server",
     skills: [
-      { name: "FastAPI", level: "Expert", tag: "Asynchronous REST / Microservices" },
-      { name: "Python", level: "Expert", tag: "Asyncio / Data Pipelines" },
-      { name: "Django", level: "Intermediate", tag: "REST Framework" },
-      { name: "Node.js", level: "Intermediate", tag: "Express / APIs" },
-      { name: "RESTful API Design", level: "Expert", tag: "OpenAPI / Swagger" },
-      { name: "Asynchronous Pipelines", level: "Advanced", tag: "Redis / Celery" }
+      { name: "FastAPI", level: "Async APIs", tag: "AsyncIO · WebSockets · REST · Dependency Injection" },
+      { name: "Python", level: "Core Backend", tag: "AsyncIO · Event Loops · Concurrency · Pydantic" },
+      { name: "RESTful API Design", level: "API Contracts", tag: "OpenAPI Specs · Validation · Error Handling" },
+      { name: "WebSockets", level: "Streaming", tag: "Bidirectional Audio Transport · Real-Time Events" },
+      { name: "Django", level: "Framework", tag: "Django REST Framework · ORM · Microservices" },
+      { name: "Asynchronous Tasks", level: "Background Jobs", tag: "Redis Queues · Non-blocking IO · Workers" }
     ]
   },
   {
     title: "Frontend Engineering",
     iconName: "Layout",
     skills: [
-      { name: "ReactJS", level: "Expert", tag: "Hooks / Context / Fiber" },
-      { name: "Next.js 15", level: "Advanced", tag: "App Router / RSC" },
-      { name: "TypeScript", level: "Advanced", tag: "Strict Types / Generics" },
-      { name: "Tailwind CSS", level: "Expert", tag: "Custom Tokens / Glassmorphism" },
-      { name: "Framer Motion", level: "Advanced", tag: "Scroll & Micro-Animations" },
-      { name: "HTML5 & CSS3", level: "Expert", tag: "Semantic UI / Layouts" }
+      { name: "ReactJS", level: "Component UI", tag: "Hooks · State Architecture · Performance Profiling" },
+      { name: "Next.js", level: "App Router", tag: "Server/Client Components · SSR · API Routes" },
+      { name: "TypeScript", level: "Type Safety", tag: "Strict Types · Generics · Interface Contracts" },
+      { name: "Tailwind CSS", level: "Styling", tag: "Custom Design Tokens · Responsive Layouts · Dark Mode" },
+      { name: "Framer Motion", level: "Interactions", tag: "Spring Physics · Micro-Animations · Layout Transitions" }
     ]
   },
   {
     title: "Databases & Storage",
     iconName: "Database",
     skills: [
-      { name: "PostgreSQL", level: "Advanced", tag: "Relational Design / Indexing" },
-      { name: "MongoDB", level: "Intermediate", tag: "Document Store" },
-      { name: "Redis", level: "Advanced", tag: "In-Memory Caching / Pub-Sub" },
-      { name: "Vector Databases", level: "Advanced", tag: "Embeddings / Similarity Search" },
-      { name: "SQL Query Optimization", level: "Advanced", tag: "Joins / Query Plans" }
+      { name: "PostgreSQL", level: "Relational DB", tag: "Schema Design · Indexing · ACID Transactions · SQL" },
+      { name: "Redis", level: "In-Memory", tag: "Caching Layers · TTL · Pub/Sub · Session State" },
+      { name: "Vector Databases", level: "Embeddings", tag: "Similarity Search · Cosine Distance · Indexing" },
+      { name: "MongoDB", level: "Document Store", tag: "JSON Documents · Aggregations · Indexing" }
     ]
   },
   {
-    title: "DevOps & Cloud Infrastructure",
+    title: "DevOps & Infrastructure",
     iconName: "Cloud",
     skills: [
-      { name: "Docker", level: "Advanced", tag: "Containerization / Docker Compose" },
-      { name: "GitHub Actions", level: "Advanced", tag: "CI/CD Pipelines" },
-      { name: "Vercel", level: "Expert", tag: "Edge Deployment" },
-      { name: "Git & GitHub", level: "Expert", tag: "Version Control / Code Reviews" },
-      { name: "Linux / Bash", level: "Intermediate", tag: "CLI / Shell Scripting" }
+      { name: "Docker", level: "Containers", tag: "Multi-stage Builds · Docker Compose · Container Isolation" },
+      { name: "GitHub Actions", level: "CI/CD", tag: "Automated Test Suites · Linting · Build Pipelines" },
+      { name: "Vercel", level: "Edge Hosting", tag: "Serverless Deployments · Edge Runtime · Routing" },
+      { name: "Git & Version Control", level: "Collaboration", tag: "Branching Workflows · Code Reviews · Semantic PRs" },
+      { name: "Linux / Bash", level: "System Admin", tag: "Shell Scripting · Process Management · CLI Tooling" }
     ]
   },
   {
     title: "Core Computer Science",
     iconName: "Code2",
     skills: [
-      { name: "Data Structures & Algorithms", level: "Expert", tag: "Arrays, Trees, Graphs, DP" },
-      { name: "Object-Oriented Programming", level: "Expert", tag: "OOP Design Patterns" },
-      { name: "DBMS & Transactions", level: "Advanced", tag: "ACID Compliance / Schema Design" },
-      { name: "Operating Systems", level: "Advanced", tag: "Concurrency / Threads / Memory" },
-      { name: "Software Design (SDLC)", level: "Advanced", tag: "Clean Code / Modular Architecture" }
+      { name: "Data Structures & Algorithms", level: "Problem Solving", tag: "Arrays · Trees · Graphs · DP · Complexity" },
+      { name: "Object-Oriented Design", level: "Patterns", tag: "Design Patterns · Separation of Concerns · Clean Code" },
+      { name: "DBMS & Transactions", level: "Database Theory", tag: "ACID · Concurrency Control · Query Planning" },
+      { name: "Operating Systems", level: "Systems", tag: "Processes · Threads · Memory Allocation · Virtualization" }
     ]
+  }
+];
+
+export const ENGINEERING_PROOF: ProofItem[] = [
+  {
+    id: "testing",
+    category: "Automated Testing",
+    icon: "CheckCircle2",
+    headline: "27 Automated Tests Passing in VoxPilot",
+    metric: "27/27 Tests",
+    detail: "Comprehensive test harness validating provider routing policies, WebSocket audio transport, selective RAG retrieval, circuit breaker state transitions, and deterministic tool safety gates.",
+    verificationMethod: "Pytest unit & integration test suite executed across mock audio and provider failure streams.",
+    linkText: "View VoxPilot Tests on GitHub",
+    linkUrl: "https://github.com/srinathdoggala-tech/voxpilot"
+  },
+  {
+    id: "latency",
+    category: "Performance Rigor",
+    icon: "Zap",
+    headline: "35% Median API Response Reduction",
+    metric: "35% Faster",
+    detail: "Measured optimization at Sreeva AI achieved by refactoring blocking synchronous routes to Python asyncio event loops paired with in-memory Redis caching.",
+    verificationMethod: "Before/after benchmark comparing repeated query latencies on production endpoint traffic.",
+    linkText: "View Sreeva AI Experience",
+    linkUrl: "#experience"
+  },
+  {
+    id: "benchmarks",
+    category: "Document Benchmarking",
+    icon: "FileCheck2",
+    headline: "500+ Resumes Document Evaluation",
+    metric: "500+ Tested",
+    detail: "Stress-tested TalentLens AI document ingestion across varied formatting, multi-column layouts, and ATS keyword extraction under continuous load conditions.",
+    verificationMethod: "Automated batch processing test harness verifying parsing stability and schema adherence.",
+    linkText: "View TalentLens Repository",
+    linkUrl: "https://github.com/srinathdoggala/TalentLens-AI"
+  },
+  {
+    id: "architecture",
+    category: "Reliability & Safety",
+    icon: "ShieldCheck",
+    headline: "Deterministic Guardrails & Circuit Breakers",
+    metric: "Zero Cascades",
+    detail: "Decoupled tool safety confirmation schema preventing unverified actions, combined with health-aware provider fallback routing when LLM APIs degrade.",
+    verificationMethod: "Simulated upstream failure injection with automatic sub-second fallback failover.",
+    linkText: "Explore Interactive Architecture",
+    linkUrl: "#architecture"
+  },
+  {
+    id: "deployment",
+    category: "CI/CD & Delivery",
+    icon: "Layers",
+    headline: "Dockerized Microservices & CI/CD",
+    metric: "100% CI/CD",
+    detail: "Multi-stage Docker builds paired with automated GitHub Actions workflows for continuous linting, testing, and deployment to Vercel edge networks.",
+    verificationMethod: "Automated GitHub Actions runners on every commit with pull-request status gates.",
+    linkText: "Review ReviewGPT on GitHub",
+    linkUrl: "https://github.com/srinathdoggala-tech/AI-Code-Review-Platform"
+  },
+  {
+    id: "source",
+    category: "Public Repositories",
+    icon: "Code2",
+    headline: "100% Verifiable Open-Source Repositories",
+    metric: "Public Code",
+    detail: "Complete transparency: VoxPilot, ResearchGPT, ReviewGPT, and TalentLens have public GitHub repositories with setup documentation and clean git history.",
+    verificationMethod: "Inspectable source code, architecture diagrams, test fixtures, and environment templates.",
+    linkText: "Browse GitHub Profile",
+    linkUrl: "https://github.com/srinathdoggala"
   }
 ];
 
@@ -420,14 +565,6 @@ export const CERTIFICATIONS: Certification[] = [
     verifyUrl: "https://coursera.org/verify/duke-ml"
   },
   {
-    id: "coursera-advanced-ai",
-    title: "Advanced AI Techniques in Python",
-    issuer: "Coursera",
-    badgeColor: "from-cyan-500 to-blue-600",
-    skillsCovered: ["Python ML Pipelines", "Feature Engineering", "Model Evaluation"],
-    verifyUrl: "https://coursera.org/verify/advanced-ai"
-  },
-  {
     id: "ucb-sql",
     title: "The Structured Query Language (SQL)",
     issuer: "University of Colorado Boulder",
@@ -453,32 +590,13 @@ export const EDUCATION: EducationItem[] = [
   {
     id: "sr-junior-college",
     institution: "SR Junior College",
-    degree: "Intermediate (MPC - Mathematics, Physics, Chemistry)",
+    degree: "Intermediate (MPC: Mathematics, Physics, Chemistry)",
     period: "2021 – 2023",
     location: "Hanmakonda, India",
-    score: "97.5%",
+    score: "97.5% Academic Distinction",
     details: [
-      "Graduated with Academic Distinction (97.5% aggregate percentage).",
-      "Demonstrated analytical excellence in Mathematics and Physical Sciences."
+      "Senior Secondary Board Examination: 97.5% aggregate percentage (Academic Distinction).",
+      "Demonstrated analytical excellence in Advanced Mathematics, Physics, and Chemistry."
     ]
-  }
-];
-
-export const ACHIEVEMENTS = [
-  {
-    title: "35% API Response Time Optimization",
-    description: "Architected asynchronous FastAPI pipelines with Redis caching at Sreeva AI, boosting system throughput and lowering backend response latency by 35%."
-  },
-  {
-    title: "500+ Resume Stress Testing Pipeline",
-    description: "Engineered scalable document evaluation routines for TalentLens AI capable of parsing and scoring 500+ resumes during continuous load testing."
-  },
-  {
-    title: "Autonomous 4-Agent Research Engine",
-    description: "Designed ResearchGPT featuring 4 synchronized LLM agents (Planner, Researcher, Verifier, Writer) with Tavily API real-time search & source verification."
-  },
-  {
-    title: "97.5% Board Academic Distinction",
-    description: "Achieved top academic performance in Senior Secondary Examinations with a 97.5% score."
   }
 ];

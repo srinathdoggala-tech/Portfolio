@@ -14,12 +14,11 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { name: "About", href: "#about" },
+  { name: "Work", href: "#projects" },
   { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Tech Stack", href: "#tech-stack" },
-  { name: "Certifications", href: "#certifications" },
+  { name: "Stack", href: "#skills" },
+  { name: "Proof", href: "#proof" },
+  { name: "Architecture", href: "#architecture" },
   { name: "Education", href: "#education" },
   { name: "Contact", href: "#contact" },
 ];

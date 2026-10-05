@@ -14,9 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Srinath Doggala | AI Engineer & Full Stack Architect",
+  title: "Srinath Doggala | AI Systems Engineer",
   description:
-    "Portfolio of Srinath Doggala - Founding AI Full Stack Engineer Intern building autonomous multi-agent AI systems, FastAPI microservices, and high-throughput web applications.",
+    "Portfolio of Srinath Doggala - Founding AI Full Stack Engineer Intern building reliable AI systems: real-time voice streaming, multi-agent pipelines, FastAPI backends, and full-stack web platforms.",
   keywords: [
     "Srinath Doggala",
     "AI Engineer",

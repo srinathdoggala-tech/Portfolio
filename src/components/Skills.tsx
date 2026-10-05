@@ -2,7 +2,18 @@
 
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Cpu, Server, Layout, Database, Cloud, Code2, Search, Filter, Sparkles, CheckCircle2 } from "lucide-react";
+import {
+  Cpu,
+  Server,
+  Layout,
+  Database,
+  Cloud,
+  Code2,
+  Search,
+  Filter,
+  Sparkles,
+  Layers
+} from "lucide-react";
 import { SKILL_CATEGORIES } from "../lib/data";
 
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
@@ -10,7 +21,7 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   "Backend & Microservices": Server,
   "Frontend Engineering": Layout,
   "Databases & Storage": Database,
-  "DevOps & Cloud Infrastructure": Cloud,
+  "DevOps & Infrastructure": Cloud,
   "Core Computer Science": Code2,
 };
 
@@ -47,14 +58,14 @@ export const Skills: React.FC = () => {
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
-            <Cpu className="w-3.5 h-3.5 text-amber-400" />
-            <span>TECHNICAL CAPABILITIES &amp; CS CORE</span>
+            <Layers className="w-3.5 h-3.5 text-amber-400" />
+            <span>ENGINEERING STACK &amp; CAPABILITIES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Engineering &amp; Technology <span className="gradient-text-gold">Stack</span>
+            Technical Stack &amp; <span className="gradient-text-gold">Tooling</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Production technology skills across AI orchestration, asynchronous backend systems, modern web frontends, and core computer science fundamentals.
+            Practical engineering capabilities across AI orchestration, asynchronous backends, modern web frontends, and core CS fundamentals.
           </p>
         </div>
 
@@ -65,10 +76,10 @@ export const Skills: React.FC = () => {
             <Search className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search skills (e.g. FastAPI, LangChain, React)..."
+              placeholder="Filter stack (e.g. FastAPI, RAG, React)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60"
+              className="w-full pl-10 pr-4 py-2 text-xs bg-white/5 rounded-xl text-white placeholder-gray-500 border border-amber-500/20 focus:outline-none focus:border-amber-400/60 font-mono"
             />
           </div>
 
@@ -82,8 +93,8 @@ export const Skills: React.FC = () => {
                   onClick={() => setSelectedCategory(catName)}
                   className={`px-3 py-1.5 text-xs font-mono rounded-xl transition-all ${
                     isSelected
-                      ? "bg-amber-500 text-gray-950 font-bold shadow-md shadow-amber-500/20"
-                      : "text-gray-400 hover:text-white glass-panel border border-amber-500/20"
+                      ? "bg-amber-400 text-gray-950 font-bold shadow-md shadow-amber-500/20"
+                      : "text-gray-400 hover:text-white glass-panel border border-white/10"
                   }`}
                 >
                   {catName}
@@ -94,10 +105,10 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* Skills Cards Grid */}
-        <div className="space-y-12">
+        <div className="space-y-10">
           {filteredCategories.length === 0 ? (
-            <div className="p-12 text-center text-gray-400 font-mono text-sm glass-panel rounded-2xl border border-amber-500/20">
-              No skills found matching &quot;{searchQuery}&quot;. Try resetting your search filter.
+            <div className="p-12 text-center text-gray-400 font-mono text-sm glass-panel rounded-2xl border border-white/10">
+              No matching technologies found for &quot;{searchQuery}&quot;.
             </div>
           ) : (
             filteredCategories.map((category) => {
@@ -106,37 +117,37 @@ export const Skills: React.FC = () => {
               return (
                 <div key={category.title} className="space-y-4">
                   {/* Category Title Header */}
-                  <div className="flex items-center gap-3 pb-2 border-b border-amber-500/20">
-                    <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                      <Icon className="w-5 h-5" />
+                  <div className="flex items-center gap-3 pb-2 border-b border-white/[0.08]">
+                    <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                      <Icon className="w-4 h-4" />
                     </div>
-                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
-                    <span className="text-xs font-mono text-gray-500">({category.skills.length} skills)</span>
+                    <h3 className="text-lg font-bold text-white tracking-tight">{category.title}</h3>
+                    <span className="text-xs font-mono text-gray-500">({category.skills.length})</span>
                   </div>
 
                   {/* Skills Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                     {category.skills.map((skill, idx) => (
                       <motion.div
                         key={skill.name}
-                        initial={{ opacity: 0, scale: 0.95 }}
+                        initial={{ opacity: 0, scale: 0.96 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: idx * 0.05 }}
-                        className="glass-panel glass-panel-hover p-4 rounded-xl border border-white/10 flex items-center justify-between group"
+                        transition={{ duration: 0.25, delay: idx * 0.03 }}
+                        className="glass-panel p-4 rounded-xl border border-white/10 flex flex-col justify-between group hover:border-amber-400/40 hover:bg-amber-950/10 transition-all"
                       >
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-sm text-white group-hover:text-blue-400 transition-colors">
-                              {skill.name}
-                            </span>
-                          </div>
-                          <p className="text-xs text-gray-400 font-mono">{skill.tag}</p>
+                        <div className="flex items-start justify-between gap-2">
+                          <span className="font-semibold text-sm text-white group-hover:text-amber-300 transition-colors">
+                            {skill.name}
+                          </span>
+                          <span className="px-2 py-0.5 text-[10px] font-mono rounded-md bg-white/[0.05] text-amber-300 border border-white/10 flex-shrink-0">
+                            {skill.level}
+                          </span>
                         </div>
 
-                        <span className="px-2.5 py-1 text-[10px] font-mono font-medium rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 flex-shrink-0">
-                          {skill.level}
-                        </span>
+                        <p className="text-xs text-gray-400 font-mono pt-2 leading-relaxed">
+                          {skill.tag}
+                        </p>
                       </motion.div>
                     ))}
                   </div>

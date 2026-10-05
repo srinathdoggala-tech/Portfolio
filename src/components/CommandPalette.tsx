@@ -18,13 +18,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
   const actions = useMemo(() => {
     return [
       { id: "hero", title: "Go to Home / Hero", category: "Navigation", icon: Cpu, action: () => scrollTo("#hero") },
-      { id: "about", title: "Go to About & Statistics", category: "Navigation", icon: FileText, action: () => scrollTo("#about") },
+      { id: "projects", title: "Go to Selected Work (Projects)", category: "Navigation", icon: Code2, action: () => scrollTo("#projects") },
       { id: "experience", title: "Go to Experience (Sreeva AI)", category: "Navigation", icon: Briefcase, action: () => scrollTo("#experience") },
-      { id: "projects", title: "Go to Projects Showcase", category: "Navigation", icon: Code2, action: () => scrollTo("#projects") },
-      { id: "skills", title: "Go to Skills & Core CS", category: "Navigation", icon: Cpu, action: () => scrollTo("#skills") },
+      { id: "skills", title: "Go to Capabilities & Stack", category: "Navigation", icon: Cpu, action: () => scrollTo("#skills") },
+      { id: "proof", title: "Go to Engineering Proof & Reliability", category: "Navigation", icon: FileText, action: () => scrollTo("#proof") },
+      { id: "architecture", title: "Go to System Architecture", category: "Navigation", icon: Cpu, action: () => scrollTo("#architecture") },
+      { id: "education", title: "Go to Education & Background", category: "Navigation", icon: GraduationCap, action: () => scrollTo("#education") },
       { id: "certifications", title: "Go to Certifications", category: "Navigation", icon: Award, action: () => scrollTo("#certifications") },
-      { id: "education", title: "Go to Education", category: "Navigation", icon: GraduationCap, action: () => scrollTo("#education") },
-      { id: "contact", title: "Go to Contact & Availability", category: "Navigation", icon: Mail, action: () => scrollTo("#contact") },
+      { id: "contact", title: "Go to Contact & Interview Inquiries", category: "Navigation", icon: Mail, action: () => scrollTo("#contact") },
       
       // Direct Project Links
       ...PROJECTS.map((proj) => ({

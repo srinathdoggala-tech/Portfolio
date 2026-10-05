@@ -4,8 +4,8 @@ import React from "react";
 import { PERSONAL_INFO } from "@/lib/data";
 
 export const CompanyMarquee: React.FC = () => {
-  const companies = PERSONAL_INFO.targetCompanies;
-  const doubled = [...companies, ...companies];
+  const roles = PERSONAL_INFO.targetRoles;
+  const doubled = [...roles, ...roles];
 
   return (
     <div className="w-full overflow-hidden relative py-4 select-none">
@@ -15,13 +15,13 @@ export const CompanyMarquee: React.FC = () => {
 
       {/* Infinite Marquee Track */}
       <div className="animate-marquee gap-3 sm:gap-4 flex items-center">
-        {doubled.map((company, idx) => (
+        {doubled.map((role, idx) => (
           <div
-            key={`${company}-${idx}`}
-            className="px-4 py-1.5 rounded-lg bg-gray-900/60 border border-gray-800 text-xs font-mono text-gray-300 hover:text-white hover:border-blue-500/40 hover:bg-blue-950/20 transition-all flex items-center gap-2 shrink-0 cursor-default shadow-sm"
+            key={`${role}-${idx}`}
+            className="px-4 py-1.5 rounded-lg bg-gray-900/60 border border-gray-800 text-xs font-mono text-gray-300 hover:text-white hover:border-amber-500/40 hover:bg-amber-950/20 transition-all flex items-center gap-2 shrink-0 cursor-default shadow-sm"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500/60" />
-            <span>{company}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/60" />
+            <span>{role}</span>
           </div>
         ))}
       </div>

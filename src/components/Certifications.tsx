@@ -2,87 +2,80 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Award, ExternalLink, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+import { Award, ExternalLink, ShieldCheck } from "lucide-react";
 import { CERTIFICATIONS } from "../lib/data";
 
 export const Certifications: React.FC = () => {
   return (
-    <section id="certifications" className="py-24 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Section Header */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-500/30 text-xs font-mono font-medium text-amber-300 bg-amber-950/30">
-            <Award className="w-3.5 h-3.5 text-amber-400" />
-            <span>VERIFIED ACADEMIC &amp; INDUSTRY CREDENTIALS</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Professional <span className="gradient-text-gold">Certifications</span>
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg">
-            Validated technical expertise in Google Cloud AI, Generative AI, Machine Learning, and Database SQL Architecture.
-          </p>
-        </div>
+    <section id="certifications" className="py-12 relative z-10 -mt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 bg-[#060b18]/80 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.06]">
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <Award className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white tracking-tight">Verified Certifications &amp; Credentials</h3>
+                <p className="text-xs text-gray-400 font-mono">
+                  Validated domain coursework in Google Cloud AI, Generative AI, Machine Learning, and SQL
+                </p>
+              </div>
+            </div>
 
-        {/* Certifications Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CERTIFICATIONS.map((cert, idx) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-amber-500/20 bg-amber-950/10 space-y-4 relative overflow-hidden flex flex-col justify-between group hover:border-amber-400/50"
+            <a
+              href="https://www.linkedin.com/in/srinath-doggala-081083286"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-amber-400 hover:text-amber-300 flex items-center gap-1 self-start sm:self-auto"
             >
-              {/* Subtle Badge Gradient accent */}
-              <div className={`absolute top-0 right-0 w-28 h-28 bg-gradient-to-br ${cert.badgeColor} opacity-10 rounded-full blur-xl group-hover:opacity-25 transition-opacity`} />
+              <span>View Verified LinkedIn Badges</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 text-xs font-mono font-bold text-amber-300 bg-amber-950/40 rounded-full border border-amber-500/30">
-                    {cert.issuer}
-                  </span>
-                  <ShieldCheck className="w-5 h-5 text-cyan-400" />
-                </div>
-
-                <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors leading-snug">
-                  {cert.title}
-                </h3>
-
-                {/* Covered Skills */}
-                <div className="space-y-2 pt-2">
-                  <span className="text-[11px] font-mono text-gray-400">Validated Skills:</span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {cert.skillsCovered.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2 py-0.5 text-[11px] font-mono text-gray-300 glass-panel rounded-md border border-white/10"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+          {/* Compact 4-Card Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {CERTIFICATIONS.map((cert, idx) => (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-amber-400/40 hover:bg-amber-950/10 transition-all flex flex-col justify-between group"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-mono font-bold text-amber-300">
+                      {cert.issuer}
+                    </span>
+                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
                   </div>
-                </div>
-              </div>
 
-              {/* Verify Link */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Verified Credential
-                </span>
-                <a
-                  href={cert.verifyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-mono transition-colors"
-                >
-                  <span>Verify Link</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </motion.div>
-          ))}
+                  <h4 className="text-xs font-semibold text-white group-hover:text-amber-300 transition-colors leading-snug">
+                    {cert.title}
+                  </h4>
+
+                  <p className="text-[10px] font-mono text-gray-400 leading-tight">
+                    {cert.skillsCovered.join(" · ")}
+                  </p>
+                </div>
+
+                <div className="pt-3 mt-2 border-t border-white/[0.04]">
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-mono text-gray-400 hover:text-white flex items-center gap-1 transition-colors"
+                  >
+                    <span>Verify Credential</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal as TerminalIcon, X, Maximize2, Minimize2, Sparkles, CornerDownLeft } from "lucide-react";
 import confetti from "canvas-confetti";
-import { PERSONAL_INFO, PROJECTS, SKILL_CATEGORIES, QUICK_STATS } from "@/lib/data";
+import { PERSONAL_INFO, PROJECTS, SKILL_CATEGORIES, QUICK_STATS, ENGINEERING_PROOF } from "@/lib/data";
 
 interface TerminalModalProps {
   isOpen: boolean;
@@ -105,6 +105,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">whoami</span> - Developer bio & role</div>
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">skills</span> - Full technical skill stack</div>
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">projects</span> - Featured AI & web projects</div>
+              <div><span className="text-yellow-400 w-24 inline-block font-semibold">proof</span> - Engineering tests & metrics</div>
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">contact</span> - Email, phone, socials & links</div>
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">stats</span> - System speedups & benchmarks</div>
               <div><span className="text-yellow-400 w-24 inline-block font-semibold">hire</span> - Trigger confetti + availability</div>
@@ -199,6 +200,24 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="text-cyan-400 font-bold text-sm">{s.value}</div>
                 <div className="text-gray-200 font-medium">{s.label}</div>
                 <div className="text-gray-400 text-[10px]">{s.subtext}</div>
+              </div>
+            ))}
+          </div>
+        );
+        break;
+
+      case "proof":
+        outputContent = (
+          <div className="space-y-2 font-mono text-xs">
+            <p className="text-cyan-400 font-semibold">Verifiable Engineering Evidence Matrix:</p>
+            {ENGINEERING_PROOF.map((p, idx) => (
+              <div key={idx} className="p-2 rounded bg-gray-900/80 border border-gray-800 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-emerald-400 font-bold">{p.headline}</span>
+                  <span className="text-yellow-400 text-[11px] font-mono">{p.metric}</span>
+                </div>
+                <p className="text-gray-300 text-[11px]">{p.detail}</p>
+                <p className="text-gray-500 text-[10px]">Verification: {p.verificationMethod}</p>
               </div>
             ))}
           </div>
@@ -363,7 +382,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             {/* Quick Command Pills */}
             <div className="px-4 py-2 bg-gray-900/60 border-t border-gray-900 flex items-center gap-2 overflow-x-auto text-[11px] text-gray-400 no-scrollbar">
               <span className="text-gray-500 font-semibold shrink-0">Quick Commands:</span>
-              {["whoami", "skills", "projects", "contact", "stats", "hire", "matrix", "clear"].map((cmd) => (
+              {["whoami", "skills", "projects", "proof", "contact", "stats", "hire", "matrix", "clear"].map((cmd) => (
                 <button
                   key={cmd}
                   onClick={() => handleCommand(cmd)}
